@@ -6,12 +6,12 @@
 - Installer pip3
 
 ### Créer l'environnement
-$ python -m venv venv
+`$ python -m venv venv`
 
 ### installer les librairies
-$ pip install pygame
+`$ pip install pygame`
 
-$ pip install requests
+`$ pip install requests`
 
 ### paramétrer les liens entre les composants de la machine
 
@@ -22,7 +22,7 @@ Ouvrir une fenetre terminal (cmd.exe)
 se déplacer dans le répertoire du projet
 activer l'environnement 
 
-$ venv\Scripts\activate
+`$ venv\Scripts\activate`
 
 lancer le bouchon
 
