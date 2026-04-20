@@ -25,6 +25,7 @@ activer l'environnement
 \> venv\Scripts\activate
 
 lancer le bouchon
+
 \> python bouchonEsp.py
 
 ### lancer le moteur principal
