@@ -9,6 +9,9 @@
 `$ python -m venv venv`
 
 ### installer les librairies
+activer l'environnement
+`$ venv\Scripts\activate`
+
 `$ pip install pygame`
 
 `$ pip install requests`
