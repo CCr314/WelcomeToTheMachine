@@ -1,0 +1,98 @@
+[
+  {
+    "question": "Quel événement a déclenché le début de la révolution du jasmin en Tunisie ?",
+    "image" : "reflexion.png",
+    "reponse": 1,
+    "choix" : ["L'explosion d'une université à Tunis" , "L'immolation par le feu d'un jeune vendeur" , "Un pillage de magasins à Tunis par des bandes organisées", "Un procès truqué"]
+  },
+  {
+    "question": "Combien de chefs d'accusation requiert le procureur Cyrus Vance Jr. à l'encontre de DSK, suite à son incarcération pour viol ?",
+    "image" : "peur.png",
+    "reponse": 2,
+    "choix" : ["5" , "7" , "9", "11"]
+  },
+  {
+    "question": "Quelle maison d'édition a fêté son centième anniversaire en 2011 ?",
+    "image" : "doute.png",
+    "reponse": 2,
+    "choix" : ["Plon" , "Flammarion" , "Gallimard", "Hachette"]
+  },
+  {
+    "question": "De quel pays Vaclav Havel, décédé en décembre 2011, avait-il été le président de 1993 à 2003 ?",
+    "image" : "homme.png",
+    "reponse": 1,
+    "choix" : ["Hongrie" , "Tchécoslovaquie" , "Pologne", "Roumanie"]
+  },
+  {
+    "question": "L'accélérateur de particules du CERN atteint un nouveau record en 2011 en produisant…",
+    "image" : "peur.png",
+    "reponse": 2,
+    "choix" : ["1 millions de collisions par seconde" , "10 millions de collisions par seconde" , "100 millions de collisions par seconde", "200 millions de collisions par seconde"]
+  },
+  {
+    "question": "Les All Blacks sont devenus champions du monde de rugby en Nouvelle-Zélande, contre qui ?",
+    "image" : "sourire.png",
+    "reponse": 0,
+    "choix" : ["France" , "Afrique du Sud" , "Angleterre", "Australie"]
+  },
+  {
+    "question": "Oussama Ben Laden décède en mai 2011. Quel était sa nationalité ?",*
+    "image" : "femme.png",
+    "reponse": 1,
+    "choix" : ["Pakistanais" , "Saoudien" , "Afghan", "Syrien"]
+  },
+  {
+    "question": "Quel est ce pays qui a été ravagé par un séisme et un tsunami le 11 mars ?",
+    "image" : "facile.png",
+    "reponse": 2,
+    "choix" : ["Corée du Sud" , "Grèce" , "Japon", "Chine"]
+  },
+  {
+    "question": "2011 est une année record pour le cinéma français. Quel film fait près de 20 millions d'entrées ?",
+    "image" : "sourire.png",
+    "reponse": 0,
+    "choix" : ["Intouchables" , "The Artist" , "Les Petits Mouchoirs", "Astérix et Obélix"]
+  },
+  {
+    "question": "Dans quel lieu s'est tenu le mariage royal unissant Catherine Middleton au prince de Galles ?",
+    "image" : "doute.png",
+    "reponse": 0,
+    "choix" : ["L'abbaye de Westminste" , "La cathédrale Saint-Paul" , "Lambeth Palace", "Covent Garden"]
+  },
+  {
+    "question": "Comment se nomme la bactérie qui a intoxiqué plusieurs enfants dans la région du Nord-Pas-de-Calais en juin 2011 ?",
+    "image" : "peur.png",
+    "reponse": 2,
+    "choix" : ["E. chrysanthemi" , "P. pestis" , "E. coli", "Pi Senli"]
+  },
+  {
+    "question": "À l'occasion de quel rassemblement le massacre sur l'île d'Utoya a-t-il eu lieu ?",
+    "image" : "reflexion.png",
+    "reponse": 0,
+    "choix" : ["Le camp d'été de la Ligue des jeunes travaillistes" , "Le meeting d'adhérents au Parti communiste norvégien" , "La commémoration d'un leader socialiste norvégien", "Un match de foot"]
+  },
+  {
+    "question": "Pour quelle affaire Jacques Servier est-il mis en examen en septembre 2011 ?",
+    "image" : "homme.png",
+    "reponse": 1,
+    "choix" : ["L'affaire des écoutes illégales à l'Élysée" , "L'affaire Mediator" , "L'affaire PIP", "L'affaire du sang contaminé"]
+  },
+  {
+    "question": "Quel tube a rendue célèbre Amya Winehouse décédée à l'âge de 27 ans ?",
+    "image" : "femme.png",
+    "reponse": 1,
+    "choix" : ["Respect" , "Rehab" , "Upside Down", "Rollin In The Deep"]
+  },
+  {
+    "question": "Quelle équipe les Français ont-ils battu en finale du championnat du monde en Suède ? ?",
+    "image" : "facile.png",
+    "reponse": 2,
+    "choix" : ["L'Espagne" , "La Roumanie" , "Le Danemark", "L'Islande"]
+  },
+  {
+    "question": "Elizabeth Taylor nous a quitté en 2011. Combien de fois a-t-elle été mariée ?",
+    "image" : "femme.png",
+    "reponse": 3,
+    "choix" : ["5" , "6" , "7", "8"]
+  }
+]

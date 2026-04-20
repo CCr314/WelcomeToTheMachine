@@ -1,0 +1,102 @@
+[
+  {
+    "question": "Qui était face à François Mitterrand lors du second tour des élections présidentielles de 1981 ?",
+    "image" : "homme.png",
+    "reponse": 1,
+    "choix" : ["Jacques Chirac" , "Valéry Giscard d'Estaing" , "Georges Marchais", "Edouard Balladur"]
+  },
+  {
+    "question": "Quel acteur français est décédé le 15 novembre 1976 ?",
+  },
+
+  {
+    "question": "Quel pays est rentré dans l'Union Européenne en 1981 ?",
+    "image" : "peur.png",
+    "reponse": 2,
+    "choix" : ["Croatie" , "Espagne" , "Grèce", "Slovénie"]
+  },
+  {
+    "question": "Quel chanteur est décédé le 11 mai 1981 ?",
+    "image" : "homme.png",
+    "reponse": 0,
+    "choix" : ["Bob Marley" , "Elvis Presley" , "Kurt Cobain", "Bon Scott"]
+  },
+  {
+    "question": "Qui a chanté \"\"Bette Davis Eyes\"\" sorti en 1981 ?",
+    "image" : "femme.png",
+    "reponse": 2,
+    "choix" : ["Kylie Minogue" , "Kim Wilde" , "Kim Carnes", "Kate Bush"]
+  },
+  {
+    "question": "Qui a réalisé le film \"\"Indiana Jones, Les Aventuriers de l'Arche perdue\"\" sorti en 1981 ?",
+    "image" : "homme.png",
+    "reponse": 0,
+    "choix" : ["Steven Spielberg" , "Steven Soderbergh" , "Stephen Frears", "Stephen Daldry"]
+  },
+  {
+    "question": "Qui le prince Charles épouse-t-il en 1981 ?",
+    "image" : "femme.png",
+    "reponse": 1,
+    "choix" : ["Camilla Parker Bowles" , "Lady Diana" , "Grace Kelly", "Margaret"]
+  },
+  {
+    "question": "Quelle radio française fut créée en 1981 ?",
+    "image" : "doute.png",
+    "reponse": 0,
+    "choix" : ["NRJ" , "Chérie FM" , "Fun Radio", "Skyrock"]
+  },
+  {
+    "question": "Quel film d'animation Disney est sorti en 1981 ?",
+    "image" : "reflexion.png",
+    "reponse": 1,
+    "choix" : ["La Petite Sirène" , "Rox et Rouky" , "Taram et le Chaudron magique", "Tron"]
+  },
+  {
+    "question": "Quel joueur de tennis a remporté Roland-Garros en 1981 ?",
+    "image" : "homme.png",
+    "reponse": 1,
+    "choix" : ["Jimmy Connors" , "Björn Borg" , "John McEnroe", "Yannick Noah"]
+  },
+  {
+    "question": "Quel feuilleton télévisé a débuté en 1981 ?",
+    "image" : "sourire.png",
+    "reponse": 0,
+    "choix" : ["Dynastie" , "Amour, Gloire et Beauté" , "Les Feux de l'amour", "Dallas"]
+  },
+  {
+    "question": "Qui abolit la peine de mort en 1981 ?",
+    "image" : "facile.png",
+    "reponse": 0,
+    "choix" : ["Robert Badinter" , "Charles Mauroy" , "Simone Veille", "Michèle Alliot-Marie"]
+  },
+  {
+    "question": "Où a lieu une tentative de coup d'état en Europe ?",
+    "image" : "peur.png",
+    "reponse": 2,
+    "choix" : ["Grèce" , "Portugal" , "Espagne", "Albanie"]
+  },
+  {
+    "question": "Quel personnage n'existe pas dans la série Dallas qui démarre sur la TV française ?",
+    "image" : "sourire.png",
+    "reponse": 0,
+    "choix" : ["Hélène" , "Pamela" , "Bobby", "Lucy"]
+  },
+  {
+    "question": "Quelle maladie mystérieuse commence son épidémie en 1981 ?",
+    "image" : "reflexion.png",
+    "reponse": 1,
+    "choix" : ["Ebola" , "VIH" , "SARS-CoV-2", "Gale"]
+  },
+  {
+    "question": "Qui a inventé le PC en 1981 ?",
+    "image" : "doute.png",
+    "reponse": 2,
+    "choix" : ["Apple" , "Commodore" , "IBM", "Toshiba"]
+  },
+  {
+    "question": "Pour quel film Robert de Niro reçoit-il l'oscar du meilleur acteur en 1981 ?",
+    "image" : "homme.png",
+    "reponse": 1,
+    "choix" : ["Taxi Driver" , "Raging Bull" , "Casino", "Il était une fois en Amérique"]
+  }
+]

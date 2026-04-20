@@ -1,0 +1,98 @@
+[
+  {
+    "question": "Que se passa-t-il à Loconville le 11 avril ?",
+    "image" : "reflexion.png",
+    "reponse": 1,
+    "choix" : ["Un avion allemand s'écrasa faisant 62 morts" , "Johnny Hallyday épousa Sylvie Vartan" , "Un attentat contre Michel Debré fut déjoué", "Alain Calmat devint champion du monde de patinage"]
+  },
+  {
+    "question": "Quel est le nom de l'auteur de ''325 000 francs'', décédé en mai ?",
+    "image" : "homme.png",
+    "reponse": 3,
+    "choix" : ["Louis Aragon" , "André Martinet" , "Alain Touraine", "Roger Vaillant"]
+  },
+  {
+    "question": "Quelle émission débuta le 19 septembre à la télévision française ?",
+    "image" : "sourire.png",
+    "reponse": 3,
+    "choix" : ["Bonne nuit les petits" , "La Séquence du spectateur" , "Trente millions d'amis", "Le Mot le plus long"]
+  },
+  {
+    "question": "Dans quelle discipline un Tchécoslovaque a-t-il battu le record du monde ?",
+    "image" : "peur.png",
+    "reponse": 2,
+    "choix" : ["Le saut à la perche" , "Le lancer du poids" , "Le lancer du disque", "Le lancer du javelot"]
+  },
+  {
+    "question": "Quelle catastrophe a lieu en France en février ?",
+    "image" : "doute.png",
+    "reponse": 2,
+    "choix" : ["Des inondations dans le Vaucluse" , "L'incendie d'un grand magasin parisien" , "Un coup de grisou", "Le déraillement d'un train à Vierzy"]
+  },
+  {
+    "question": "Quel nom portait le premier satellite français ?",
+    "image" : "facile.png",
+    "reponse": 0,
+    "choix" : ["Astérix" , "Obélix" , "Idéfix", "Pollux"]
+  },
+  {
+    "question": "Qui reçut le prix Nobel de la paix ?",
+    "image" : "reflexion.png",
+    "reponse": 2,
+    "choix" : ["L'ONU" , "Le pape" , "L'UNICEF", "Charles de Gaulle"]
+  },
+  {
+    "question": "Quelle marque lança la mode de la mini-jupe en France ?",
+    "image" : "doute.png",
+    "reponse": 2,
+    "choix" : ["Dior" , "Balmain" , "Courrèges", "Cardin"]
+  },
+  {
+    "question": "Qui remporta le Tour de France cycliste ?",
+    "image" : "homme.png",
+    "reponse": 0,
+    "choix" : ["Felice Gimondi" , "Arie den Hartog" , "Jacques Anquetil", "Rik Van Looy"]
+  },
+  {
+    "question": "À quel âge décéda Le Corbusier ?",
+    "image" : "reflexion.png",
+    "reponse": 2,
+    "choix" : ["67 ans" , "70 ans" , "77 ans", "79 ans"]
+  },
+  {
+    "question": "Que sont les Marches de Selma ",
+    "image" : "peur.png",
+    "reponse": 0,
+    "choix" : ["Des protestations qui ont marqué la lutte des droits civiques des Afro-Américains" , "Un œuvre d'art de Selma Lepart" , "Un escalier contemporain de Selma Wright", "Une pièce de théâtre"]
+  },
+  {
+    "question": "Quel droit obtiennent les femmes en juillet ?",
+    "image" : "facile.png",
+    "reponse": 1,
+    "choix" : ["Le droit de vote" , "Le droit d'ouvrir un compte bancaire" , "L'autorité parentale conjointe", "Un salaire égal"]
+  },
+  {
+    "question": "Qu'est tunnel est inauguré en juillet ?",
+    "image" : "sourire.png",
+    "reponse": 2,
+    "choix" : ["Le tunnel sous la Manche" , "Le tunnel de Fréjus" , "Le tunnel du Mont Blanc", "Le tunnel du Somport"]
+  },
+  {
+    "question": "Qui se déclare candidat aux élections présidentielles ?",
+    "image" : "homme.png",
+    "reponse": 0,
+    "choix" : ["Pierre Dac" , "Coluche" , "Fernand Raynaud", "Panayotis Pascot"]
+  },
+  {
+    "question": "Qui est élu président de la république française ?",
+    "image" : "homme.png",
+    "reponse": 2,
+    "choix" : ["Jean Lecanuet" , "François Mitterand" , "Charles De Gaulle", "René Coty"]
+  },
+  {
+    "question": "Combien d'albums sortent les Beatles en 1965 ?",
+    "image" : "sourire.png",
+    "reponse": 2,
+    "choix" : ["0" , "1" , "2", "3"]
+  }
+]
