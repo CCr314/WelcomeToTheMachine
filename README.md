@@ -18,8 +18,10 @@
 
 ### lancer le bouchon de simulation des ESP
 Ouvrir une fenetre terminal (cmd.exe)
+
 \> python bouchonEsp.py
 
 ### lancer le moteur principal
 Ouvrir une fenetre terminal (cmd.exe)
+
 \> python main.py
