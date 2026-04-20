@@ -10,6 +10,7 @@ $ python -m venv venv
 
 ### installer les librairies
 $ pip install pygame
+
 $ pip install requests
 
 ### paramétrer les liens entre les composants de la machine
@@ -20,9 +21,11 @@ $ pip install requests
 Ouvrir une fenetre terminal (cmd.exe)
 se déplacer dans le répertoire du projet
 activer l'environnement 
+
 $ venv\Scripts\activate
 
 lancer le bouchon
+
 $ python bouchonEsp.py
 
 ### lancer le moteur principal
@@ -30,7 +33,9 @@ Ouvrir une fenetre terminal (cmd.exe)
 se déplacer dans le répertoire du projet
 
 activer l'environnement 
+
 $ venv\Scripts\activate
 
 lancer le moteur
+
 $ python main.py
