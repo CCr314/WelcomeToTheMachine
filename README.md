@@ -18,6 +18,8 @@ activer l'environnement
 
 `$ pip install fpdf2`
 
+`$ pip install dotenv`
+
 ### paramétrer les liens entre les composants de la machine
 
 ## Lancement
