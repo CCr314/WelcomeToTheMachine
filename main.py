@@ -35,7 +35,7 @@ class Sequence():
     no=0
     def next():
         no = no+1
-    def prev()
+    def prev():
         no=no-1
         if no < 0:
             no=0
@@ -63,6 +63,16 @@ class Serv(BaseHTTPRequestHandler):
            pygame.event.post(my_event)
 
 
+def impression():
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.add_font("BTTF","","./font/BTTF.ttf")
+    pdf.set_font('BTTF', size=12)
+    with pdf.rotation(angle=10, x=10, y=10):
+        pdf.text(10,10,"hello world")
+
+    pdf.output("./temp/hello_world.pdf")
+
 print("Lancement WebServer")
 httpd = HTTPServer(('localhost',8081),Serv)
 
@@ -72,6 +82,7 @@ clock = pygame.time.Clock()
 fenetre = pygame.display.set_mode([1280, 720])
 fenetre.fill((120, 120, 120))
 pygame.display.flip()
+impression()
 while loop:
     # gestion des evenements
     for event in pygame.event.get():
@@ -93,7 +104,7 @@ while loop:
         if event.type == QUIT:
             print("exit")
             loop=False
-    
+
     clock.tick(30)
     httpd.handle_request()
 
