@@ -13,7 +13,7 @@
 
 `$ pip install requests`
 
-`$ pip install fpdf`
+`$ pip install fpdf2`
 
 ### paramétrer les liens entre les composants de la machine
 
