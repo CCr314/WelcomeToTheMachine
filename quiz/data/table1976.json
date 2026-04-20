@@ -1,0 +1,98 @@
+[
+  {
+    "question": "Quel acteur français est décédé le 15 novembre 1976 ?",
+    "image" : "reflexion.png",
+    "reponse": 1,
+    "choix" : ["Lino Ventura" , "Jean Gabin" , "Jean-Paul Belmondo", "Marcel Bozzuffi"]
+  },
+  {
+    "question": "Sur quelle chaîne est diffusée \"\"Les Jeux de 20h\"\" à partir du 22 mars 1976 ?",
+    "image" : "sourire.png",
+    "reponse": 2,
+    "choix" : ["TF1" , "Antenne 2" , "France 3" , "La Cinq"]
+  },
+  {
+    "question": "Qui joue le rôle du fils de Louis de Funès dans le film de \"\"L'Aile ou la Cuisse\"\" sorti en 1976 ?",
+    "image" : "homme.png",
+    "reponse": 1,
+    "choix" : ["Bourvil" , "Coluche" , "Michel Serrault", "Thierry Le Luron"]
+  },
+  {
+    "question": "Quelle célèbre marque a été créée en 1976 ?",
+    "image" : "doute.png",
+    "reponse": 0,
+    "choix" : ["Apple" , "Samsung" , "LG Electronics", "Sony"]
+  },
+  {
+    "question": "Quel groupe disco a chanté \"\"Daddy Cool\"\" en 1976 ?",
+    "image" : "facile.png",
+    "reponse": 2,
+    "choix" : ["Bee Gees" , "Chic" , "Boney M", "Imagination"]
+  },
+  {
+    "question": "En France, qui est le président de la République en 1976 ?",
+    "image" : "homme.png",
+    "reponse": 2,
+    "choix" : ["François Mitterrand" , "Georges Pompidou" , "Valéry Giscard d'Estaing", "Jacques Chirac"]
+  },
+  {
+    "question": "Où se sont déroulés les Jeux Olympiques d'été de 1976 ?",
+    "image" : "doute.png",
+    "reponse": 1,
+    "choix" : ["Allemagne" , "Canada" , "États-Unis", "Mexique"]
+  },
+  {
+    "question": "Quelle série française a vu le jour en 1976 ?",
+    "image" : "feflexion.png",
+    "reponse": 1,
+    "choix" : ["Maigret" , "Commissaire Moulin" , "Commissaire Magellan", "Navaro"]
+  },
+  {
+    "question": "Qui est élu 39e président des États-Unis en 1976 ?",
+    "image" : "homme.png",
+    "reponse": 0,
+    "choix" : ["Jimmy Carter" , "Bill Clinton" , "Ronald Reagan", "Richard Nixon"]
+  },
+  {
+    "question": "À quel club de foot s'adresse la chanson \"\"Allez les Verts !\"\" sortie en 1976 ?",
+    "image" : "facile.png",
+    "reponse": 1,
+    "choix" : ["Olympique Lyonnais" , "AS Saint-Étienne" , "Les Girondins de Bordeaux", "FC Nantes"]
+  },
+  {
+    "question": "Dans quel pays la présidente Isabel Peron est renversée par un coup d'état militaire ?",
+    "image" : "femme.png",
+    "reponse": 0,
+    "choix" : ["Argentine" , "Brésil" , "Chili", "Vénézuéla"]
+  },
+  {
+    "question": "Quel groupe français voit le jour ?",
+    "image" : "peur.png",
+    "reponse": 1,
+    "choix" : ["Bijou" , "Téléphone" , "Trust", "Little Bob Story"]
+  },
+  {
+    "question": "Quel département français vote son rattachement à la France ?",
+    "image" : "reflexion.png",
+    "reponse": 1,
+    "choix" : ["Guyanne" , "Comores" , "La Réunion", "Martinique"]
+  },
+  {
+    "question": "Où ont eu lieu les émeutes contre l'introduction de l'Afrikaans comme langue officielle dans les écoles ?",
+    "image" : "peur.png",
+    "reponse": 2,
+    "choix" : ["Johannesburg" , "Sharpeville" , "Soweto", "Le Cap"]
+  },
+  {
+    "question": "Quel album du célèbre petit reporter est sorti cette année-là ?",
+    "image" : "sourire.png",
+    "reponse": 1,
+    "choix" : ["Vol 714 pour Sydney" , "Tintin et les Picaros" , "Le crabe aux pinces d'Or", "L'oreille cassée"]
+  },
+  {
+    "question": "Le 3 avril, avait lieu la 1ère cérémonie des César du cinéma français. Qui en était le maître de cérémonie ?",
+    "image" : "homme.png",
+    "reponse": 3,
+    "choix" : ["Michel Drucker" , "Francis Huster" , "Jean-Claude Brialy", "Pierre Tchernia"]
+  }
+]

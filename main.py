@@ -8,16 +8,23 @@ import threading
 import requests
 
 from http.server import HTTPServer, BaseHTTPRequestHandler
-
+from dotenv import load_dotenv
+import os
 
 # initialisation des composants
 print("initialisation des objets")
 pygame.init()
 pygame.camera.init()
 
-cam = pygame.camera.Camera("/dev/video0",(640,480))
-cam.start()
-image = cam.get_image()
+# vairables d'environnement
+load_dotenv()
+
+isCamera = os.getenv("ISCAMERA")=="ON"
+
+if isCamera:
+    cam = pygame.camera.Camera("/dev/video0",(640,480))
+    cam.start()
+    image = cam.get_image()
 
 # serveur HTTP endPoint
 class Serv(BaseHTTPRequestHandler):
@@ -36,7 +43,7 @@ class Serv(BaseHTTPRequestHandler):
 
 def startWebServeur():
     print("Lancement WebServer")
-    httpd = HTTPServer(('localhost',8080),Serv)
+    httpd = HTTPServer(('localhost',8081),Serv)
 
 loop_thread = threading.Thread(target=startWebServeur)
 loop_thread.start()
@@ -51,14 +58,19 @@ while loop:
     for event in pygame.event.get():
         if event.type == KEYDOWN:
             print("keydown")
-            response = requests.get("http://localhost:8080")
+            response = requests.get(os.getenv("URI_Convecteur") + "/convecteur/start")
             #API ESP pupitre
-            #VoltDemarrage
-            #VoltArret
-            #VoltTestOn
-            #VoltTestOff
-            #CamTangage?Value=x
-            #CamLacet?Value=x
+            #/volt/start
+            #/volt/stop
+            #/volt/run
+
+            #API convecteur
+            #/convecteur/start
+            #/convecteur/stop
+            #/convecteur/run
+            #/convecteur/error
+            #/relay/<no>/[On|Off]
+
 
 
 

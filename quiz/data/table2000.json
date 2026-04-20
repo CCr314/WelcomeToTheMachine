@@ -1,0 +1,98 @@
+[
+  {
+    "question": "Qui était Président de la République en France en 2000 ?",
+    "image" : "homme.png",
+    "reponse": 0,
+    "choix" : ["Jacques Chirac" , "Lionel Jospin" , "François Mitterand", "Nicolas Sarkozy"]
+  },
+  {
+    "question": "En janvier 2000, 1 Français sur 3 avait un ...",
+    "image" : "facile.png",
+    "reponse": 0,
+    "choix" : ["... téléphone portable" , "... ordinateur" , "... bebop", "... tatoo"]
+  },
+  {
+    "question": "En janvier 2000, pourquoi de nombreuses familles françaises vivaient-elles dans le noir ?",
+    "image" : "peur.png",
+    "reponse": 1,
+    "choix" : ["Une chute de grêlons a coupé beaucoup de câbles électriques" , "Les tempêtes de l'an passé ont laissé beaucoup de dégâts" , "es grèves à répétitions", "Un attentat breton"]
+  },
+  {
+    "question": "De quelle nationalité est Herminator, surnom du meilleur skieur du monde Hermann Maier ?",
+    "image" : "homme.png",
+    "reponse": 1,
+    "choix" : ["Suisse" , "Autrichienne" , "Allemande", "Liechtensteinoise"]
+  },
+  {
+    "question": "En 2000, quel tube a fait connaître le groupe Zebda ?",
+    "image" : "sourire.png",
+    "reponse": 3,
+    "choix" : ["Tout le bonheur du monde" , "Met de l'huile" , "Voilà l'été", "Tomber la chemise"]
+  },
+  {
+    "question": "Quel film d'action a remporté un grand succès en 2000 ?",
+    "image" : "doute.png",
+    "reponse": 1,
+    "choix" : ["Taxi" , "Taxi 2" , "Taxi Driver", "Taxi Téhéran"]
+  },
+  {
+    "question": "Quelle grande mode chez les enfants en 2000 signifie 'monstre de poche' en japonais ?",
+    "image" : "facile.png",
+    "reponse": 2,
+    "choix" : ["Perignon" , "Digimon" , "Pokémon", "Poupoupidon"]
+  },
+  {
+    "question": "Quel jeu télévisé est arrivé en France en 2000, sur la chaîne TF1 ?",
+    "image" : "sourire.png",
+    "reponse": 2,
+    "choix" : ["Bigdil" , "La roue de la fortune" , "Qui veut gagner des millions ?", "Le juste prix"]
+  },
+  {
+    "question": "Quel avion s'est écrasé au décollage près de Paris, le 25 juillet 2000 ?",
+    "image" : "peur.png",
+    "reponse": 0,
+    "choix" : ["Concorde" , "Tupolev Tu-144" , "Beluga", "Air Force One"]
+  },
+  {
+    "question": "Dans quel pays les Jeux olympiques ont-ils eu lieu en 2000 ?",
+    "image" : "doute.png",
+    "reponse": 1,
+    "choix" : ["Chine" , "Australie" , "Corée du Sud", "Afrique du Sud"]
+  },
+  {
+    "question": "Quel tome des aventures de Harry Potter, en livre, est sorti pour Noël 2000, en France ?",
+    "image" : "sourire.png",
+    "reponse": 1,
+    "choix" : ["Harry Potter et le prisonnier d'Azkaban" , "Harry Potter et la Coupe de Feu" , "Harry Pot Terre contre Pot Fer", "Harry Potter et l'ordre du Phénix"]
+  },
+  {
+    "question": "D'où vient le bug de l'an 2000 ?",
+    "image" : "reflexion.png",
+    "reponse": 2,
+    "choix" : ["Les centimes disparaitraient" , "Les grammes disparaitraient" , "Les dates sont codées sur deux chiffres", "Une fake news"]
+  },
+  {
+    "question": "Frédéric Dard meurt en juin 2000. Quels sont ses célèbres romans ?",
+    "image" : "homme.png",
+    "reponse": 2,
+    "choix" : ["Commissaire Moulin" , "Hercule Poirot" , "San Antonio", "Inspecteur Harry"]
+  },
+  {
+    "question": "Qui est élu président de la Russie en 2000 ?",
+    "image" : "homme.png",
+    "reponse": 0,
+    "choix" : ["Vladimir Poutine" , "Dimitri Medvedev" , "Viktor Zoubkov", "Boris Eltsine"]
+  },
+  {
+    "question": "Quelle maladie affole les hôpitaux en 2000 ?",
+    "image" : "peur.png",
+    "reponse": 0,
+    "choix" : ["Creutzfeldt-Jakob" , "Virus Nipah" , "SRAS", "Ebola"]
+  },
+  {
+    "question": "Avant 2000, les présidents de la République en France étaient élus pour ... ans.",
+    "image" : "facile.png",
+    "reponse": 3,
+    "choix" : ["4" , "5" , "6", "7"]
+  }
+]
