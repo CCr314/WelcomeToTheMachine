@@ -8,8 +8,8 @@
 ### Créer l'environnement
 
 ### installer les librairies
- > pip install PyGame
- > pip install 
+\> pip install PyGame
+\> pip install 
 
 ### paramétrer les liens entre les composants de la machine
 
@@ -17,8 +17,8 @@
 
 ### lancer le bouchon de simulation des ESP
 Ouvrir une fenetre terminal (cmd.exe)
- > python bouchonEsp.py
+\> python bouchonEsp.py
 
 ### lancer le moteur principal
 Ouvrir une fenetre terminal (cmd.exe)
- > python main.py
+\> python main.py
