@@ -13,6 +13,8 @@
 
 `$ pip install requests`
 
+`$ pip install fpdf`
+
 ### paramétrer les liens entre les composants de la machine
 
 ## Lancement
