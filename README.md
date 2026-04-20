@@ -26,7 +26,7 @@ activer l'environnement
 
 lancer le bouchon
 
-$ python bouchonEsp.py
+`$ python bouchonEsp.py`
 
 ### lancer le moteur principal
 Ouvrir une fenetre terminal (cmd.exe)
@@ -34,8 +34,8 @@ se déplacer dans le répertoire du projet
 
 activer l'environnement 
 
-$ venv\Scripts\activate
+`$ venv\Scripts\activate`
 
 lancer le moteur
 
-$ python main.py
+`$ python main.py`
