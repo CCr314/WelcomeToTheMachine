@@ -26,6 +26,10 @@ print("initialisation des objets")
 pygame.init()
 pygame.camera.init()
 
+pygame.joystick.init()
+joystick=pygame.joystick.Joystick(0)
+joystick.init()
+
 # vairables d'environnement
 load_dotenv()
 
@@ -74,9 +78,9 @@ def impression():
     pdf.add_font("BTTF","","./font/BTTF.ttf")
     pdf.set_font('BTTF', size=12)
     with pdf.rotation(angle=10, x=10, y=10):
-        pdf.text(10,10,"hello world")
+        pdf.text(10,10,"Welcome to the Machine")
 
-    pdf.output("./temp/hello_world.pdf")
+    pdf.output("./temp/test.pdf")
 
 print("Lancement WebServer")
 httpd = HTTPServer(('localhost',8081),Serv)
@@ -84,10 +88,13 @@ httpd = HTTPServer(('localhost',8081),Serv)
 print("lancement boucle")
 loop=True
 clock = pygame.time.Clock()
-fenetre = pygame.display.set_mode([1280, 720])
+fenetre = pygame.display.set_mode([1920, 1080])
 fenetre.fill((120, 120, 120))
 pygame.display.flip()
 impression()
+
+vid = Video("./videos/THE MACHINE Intro Complete.mp4")
+
 while loop:
     # gestion des evenements
     for event in pygame.event.get():
@@ -112,6 +119,13 @@ while loop:
 
     clock.tick(30)
     pygame.display.update()
+    
+    vid.draw(fenetre, (0,0), force_draw=False)
+
+    if vid.isEnd():
+        vid.close()
+        EnCours = False
+    
     #httpd.handle_request()
 
 pygame.quit()

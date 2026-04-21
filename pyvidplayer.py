@@ -97,7 +97,12 @@ class Video:
             self._video.seek(seek_time)
             while vid_time + seek_time < self._frame_num * self.frame_delay:
                 self._frame_num -= 1
-        
+    def isEnd(self) -> bool:
+        vid_time = self._video.get_pts()
+        if vid_time < self.duration:
+            return False
+        return True
+    
     def draw(self, surf: pygame.Surface, pos: tuple, force_draw: bool = True) -> bool:
         if self.active and (self._update() or force_draw):
             surf.blit(self.frame_surf, pos)
