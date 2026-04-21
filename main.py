@@ -13,6 +13,11 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 from dotenv import load_dotenv
 import os
 
+#video
+from pyvidplayer import Video
+
+
+
 # FPDF
 from fpdf import FPDF
 
@@ -106,7 +111,8 @@ while loop:
             loop=False
 
     clock.tick(30)
-    httpd.handle_request()
+    pygame.display.update()
+    #httpd.handle_request()
 
 pygame.quit()
 
