@@ -9,11 +9,16 @@
 `$ python -m venv venv`
 
 ### installer les librairies
+activer l'environnement
+`$ venv\Scripts\activate`
+
 `$ pip install pygame`
 
 `$ pip install requests`
 
 `$ pip install fpdf2`
+
+`$ pip install dotenv`
 
 ### paramétrer les liens entre les composants de la machine
 
