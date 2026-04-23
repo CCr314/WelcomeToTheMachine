@@ -15,6 +15,24 @@ activer l'environnement
 `$ pip install pygame pymediainfo ffmpeg requests fpdf2 dotenv`
 
 ### paramétrer les liens entre les composants de la machine
+copier le fichier env.exemple en .env
+
+`$ nano .env`
+laisser comme ils sont en test
+URI_Convecteur="http://localhost:8080"
+URI_Pupitre="http://localhost:8080"
+
+activer les caméras ou pas
+ISCAMERA1="ON"
+ISCAMERA2="OFF"
+
+activer l'impression ou pas 
+ISPRINT="OFF"
+
+Mettre en FullScreen par défaut
+ISFULLSCREEN="OFF"
+
+
 
 ## Lancement
 
