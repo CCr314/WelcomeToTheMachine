@@ -34,12 +34,16 @@ pygame.joystick.init()
 joystick=pygame.joystick.Joystick(0)
 joystick.init()
 
+pygame.mixer.init() 
+
+
 # vairables d'environnement
 load_dotenv()
 
 isCamera1 = os.getenv("ISCAMERA1")=="ON"
 isCamera2 = os.getenv("ISCAMERA2")=="ON"
 isCamera=isCamera1 or isCamera2
+isImprimante = os.getenv("ISPRINT")=="ON"
 URI_Convecteur= os.getenv("URI_Convecteur")
 URI_Pupitre=os.getenv("URI_Pupitre")
 
@@ -94,22 +98,22 @@ def Voltmetre(action):
 def Convecteur(action):
     if action==0:
         print("arret Convecteur")
-        contents = urllib.request.urlopen(URI_Convecteur + "/convecteur/stop").read()
+        contents = urllib.request.urlopen(URI_Convecteur + "/stop").read()
         print(contents)
     elif action==1:
         print("demarrage Convecteur")
-        contents = urllib.request.urlopen(URI_Convecteur + "/convecteur/start").read()
+        contents = urllib.request.urlopen(URI_Convecteur + "/start").read()
         print(contents)
     elif action==2:
         print("Arret Convecteur")
-        contents = urllib.request.urlopen(URI_Convecteur + "/convecteur/run").read()
+        contents = urllib.request.urlopen(URI_Convecteur + "/run").read()
         print(contents)
 
             # neon, Ventillo, Voltmetre, Convecteur, noEvent, video,boucle,image
-actionSequence=[[0,0,0,0,6,None,False,"demarrage.jpg"],  # seq 0
+actionSequence=[[0,0,0,0,1,None,False,"demarrage.jpg"],  # seq 0 - bouton A
                 [0,0,0,0,1,"THE MACHINE Intro Complete.mp4",True,None],  # seq 1
-                [1,0,1,1,1,None,False,"vide.jpg"],  # seq 2 démarrage
-                [0,0,0,0,1,None,False,"vide.jpg"],  # seq 3
+                [1,0,1,1,5,None,False,"vide.jpg"],  # seq 2 démarrage
+                [0,0,0,0,6,None,False,"vide.jpg"],  # seq 3
                 [0,0,0,0,1,None,False,"vide.jpg"],  # seq 4
                 [0,0,0,0,1,None,False,"vide.jpg"],  # seq 5
                 [0,0,0,0,1,None,False,"vide.jpg"],  # seq 6
@@ -235,11 +239,13 @@ def impression():
     pdf.add_page()
     pdf.add_font("BTTF","","./font/BTTF.ttf")
     pdf.set_font('BTTF', size=12)
-    with pdf.rotation(angle=10, x=10, y=10):
+    with pdf.rotation(angle=10, x=20, y=30):
         pdf.text(10,10,"Welcome to the Machine")
     if isCamera1:
         pdf.image("images/photo1.png", x=50, y=60)
     pdf.output("./temp/test.pdf")
+    if isImprimante:
+        print("lancement de l'impression")
 
 print("Préparation WebServer")
 def lanceHttpServ():  
@@ -249,6 +255,22 @@ def lanceHttpServ():
 
 loop_thread = threading.Thread(target=lanceHttpServ)
 loop_thread.start()
+
+
+def boucleParadoxeTemporel():
+    loop=True
+    vid=Video("./videos/ParadoxeTemporel.mp4")
+    #vid.set_volume(100)
+    seq.vid.pause()
+    while loop:
+        clock.tick(30)
+        pygame.display.update()
+        vid.draw(fenetre, (500,400), force_draw=False)
+
+        if vid.isEnd():
+            vid.close()
+            loop=False
+    seq.vid.resume()
 
 
 def checkEvent(event):
@@ -278,6 +300,7 @@ def checkEvent(event):
 
 print("lancement boucle")
 loop=True
+nbErreur=0
 clock = pygame.time.Clock()
 if os.getenv("ISFULLSCREEN")=="ON":
     fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
@@ -297,8 +320,16 @@ while loop:
             print(eventno)
             if seq.event==eventno:
                 seq.next()
-
-        
+            else:
+                # erreur de bouton
+                if nbErreur > 2:
+                    boucleParadoxeTemporel()
+                    nbErreur=0  # réinitialise le compteur
+                else:
+                    pygame.mixer.music.load('./sons/Klaxon enrhumé.mp3')
+                    pygame.mixer.music.play()
+                    nbErreur=nbErreur+1
+                
         if event.type == QUIT:
             print("exit")
             loop=False
