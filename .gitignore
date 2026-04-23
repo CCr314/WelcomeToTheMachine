@@ -209,6 +209,7 @@ tempCodeRunnerFile.py
 
 # PyPI configuration file
 .pypirc
+token 
 
 # Marimo
 marimo/_static/
