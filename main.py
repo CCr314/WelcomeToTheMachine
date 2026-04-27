@@ -3,13 +3,16 @@ import pygame
 import pygame.camera
 from pygame.locals import *
 
+#images
+from PIL import Image
+import drawtext
+
 # httpserver
 import threading
 import requests
 
 # http client
 import urllib.request
-
 
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
@@ -32,7 +35,9 @@ pygame.camera.init()
 
 pygame.joystick.init()
 
-isJoystick=os.getenv("ISJOSTICK")=="ON"
+font=pygame.font.Font("./font/BTTF.ttf", 40)
+
+isJoystick=os.getenv("ISJOYSTICK")=="ON"
 if isJoystick:
     joystick=pygame.joystick.Joystick(0)
     joystick.init()
@@ -43,14 +48,11 @@ MODEANNEE=0
 MODEQUIZ=1
 
 # evenements synchro
-EVENT_MODEANNEE=pygame.USEREVENT + 1
-EVENT_MODEQUIZ=pygame.USEREVENT + 2
-EVENT_PREV=pygame.USEREVENT + 3
-EVENT_NEXT=pygame.USEREVENT + 4
-EVENT_RAZ=pygame.USEREVENT + 5
-EVENT_EQUIPE=pygame.USEREVENT + 6
-
-
+EVENT_MODE=pygame.USEREVENT + 1
+EVENT_PREV=pygame.USEREVENT + 2
+EVENT_NEXT=pygame.USEREVENT + 3
+EVENT_RAZ=pygame.USEREVENT + 4
+EVENT_EQUIPE=pygame.USEREVENT + 5
 
 mode=MODEANNEE
 
@@ -71,7 +73,7 @@ if isCamera:
     camlist = pygame.camera.list_cameras()
     print(camlist)
     if isCamera1:
-        cam1 = pygame.camera.Camera("/dev/video0",(640,480))
+        cam1 = pygame.camera.Camera("/dev/video0",(1270,700))
         cam1.start()
     if isCamera2:
         cam2 = pygame.camera.Camera("/dev/video2",(640,480))
@@ -108,7 +110,7 @@ def Voltmetre(action):
         contents = urllib.request.urlopen(URI_Pupitre + "/voltmetre/start").read()
         print(contents)
     elif action==2:
-        print("Arret voltmetre")
+        print("voltmetre on")
         contents = urllib.request.urlopen(URI_Pupitre + "/voltmetre/run").read()
         print(contents)
 
@@ -123,30 +125,34 @@ def Convecteur(action):
         contents = urllib.request.urlopen(URI_Convecteur + "/start").read()
         print(contents)
     elif action==2:
-        print("Arret Convecteur")
+        print("Convecteur on")
         contents = urllib.request.urlopen(URI_Convecteur + "/run").read()
         print(contents)
 
-            # neon, Ventillo, Voltmetre, Convecteur, noEvent, video,boucle,image, son
-actionSequence=[[0,0,0,0,-1,None,False,"Sequence1.jpg", None],  # seq 0 -all bouton
-                [0,0,0,0,1,"THE MACHINE Intro Complete.mp4",True,None, None],  # seq 1
-                [1,0,1,1,5,None,False,"AttenteDemarreur.jpg", None],  # seq 2 démarrage
-                [0,0,0,0,6,None,False,"Demarreur.jpg", None],  # seq 3
-                [0,0,0,0,5,None,False,"AttenteDemarreur.jpg", None],  # seq 4
-                [0,0,0,0,6,None,False,"Demarreur.jpg", None],  # seq 5
-                [0,0,0,0,5,None,False,"AttenteDemarreur.jpg", None],  # seq 6
-                [0,0,0,0,1,None,False,"DemarreurOK.jpg", None],  # seq 7
-                [0,0,0,0,1,None,False,"vide.jpg", None],  # seq 8
-                [0,0,0,0,1,None,False,"vide.jpg", None],  # seq 9
-                [0,0,0,0,1,None,False,"vide.jpg", None],  # seq 10
-                [0,0,0,0,1,None,False,"vide.jpg", None],  # seq 11
-                [0,0,0,0,1,None,False, None, "Back To The Future - Overture.mp3"],  # seq 12
-                [0,0,0,0,1,None,False,"vide.jpg", None]]  # seq 13
+            # neon, Ventillo, Voltmetre, Convecteur, noEvent, video,boucle,image, son, texte
+actionSequence=[[0,0,0,0,-1,"Teasing 60 v3.1.mp4",False,None, None, "Appuyez sur un bouton"],  # seq 0 -all bouton - boucle d'attente
+                [0,0,0,0,5,"THE MACHINE Intro Complete.mp4",True,None, None, None],  # seq 1 - intro
+                [1,0,1,1,6,"Les Fous du Volant (démarreur 1).mp4",False,None, None, None],  # seq 2 - demarreur 1
+                [1,0,0,0,5,"THE MACHINE Intro Complete.mp4",False,None, None, None],  # seq 3 - arret demarreur 1
+                [1,0,1,1,6,"THE TIME MACHINE (démarreur 2).mp4",False,None, None, None],  # seq 4 - demarreur 2
+                [1,0,0,0,5,"THE MACHINE Intro Complete.mp4",False,None, None, None],  # seq 5 - arret demarreur 2
+                [1,0,2,2,0,"Retour vers le futur (démarreur 3).mp4",False,None, None, None],  # seq 6 - demarreur 3
+                [0,0,2,2,1,"ChoixAnneeAvantTirage.mp4",False,None, None,"Appuyez sur le bouton A"],  # seq 7 - intro photo
+                [2,1,2,2,2,None,False,None, None, "Prise de la photo"],  # seq 8
+                [2,0,2,2,2,None,False,"photo1.jpg", None, "A pour reprendre la photo, B pour poursuivre"],  # seq 9  TODO gestion du Retry
+                [3,0,2,2,3,"ChoixAnneeAvantTirage.mp4",True,None, None, "Appuyez sur le bouton C"],  # seq 10 - intro choix annéee
+                [3,0,2,2,4,"LA MACHINE Année 1976.avi",False,None, None, None],  # seq 11 - choix année
+                [0,0,2,2,4,None,False, "impression.png", None, "Appuyez sur le bouton D"],  # seq 12 - Affichge de la carte avec la photo
+                [4,0,2,2,-1,None,False,"impression.png", "Back To The Future - Overture.mp3", "Prendre la carte et la fiche mission"],  # seq 13 - impression de la mission
+                [0,0,0,0,-1,None,False,None, None, "Fin de la mission"]]  # seq 14 - fin est retour au debut
 
-actionQuiz=[[0,0,0,0,-1,None,False,"QUIZ de Garde 1.jpg"],  # seq 0 -all bouton
-                [0,0,0,0,5,None,True,"QUIZ de Garde 2.jpg"],  # seq 1
-                [1,0,1,1,5,None,False,"masque.jpg"],  # seq 2 démarrage
-                [0,0,0,0,1,None,False,"vide.jpg"]]  # seq 3
+actionQuiz=[[0,0,0,0,-1,None,False,"QUIZ de Garde 1.jpg",False,None, None, "Appuyez sur un bouton"],  # seq 0 -all bouton
+            [0,0,1,1,5,None,True,"QUIZ de Garde 2.jpg",False,None, None, "Demarrez"],  # seq 1
+            [1,0,2,2,5,None,False,"masque.jpg",False,None, None, None],  # seq 2 - question
+            [2,0,2,2,5,None,False,"masque.jpg",False,None, None, None],  # seq 3 - reponse OK
+            [3,1,2,2,5,None,False,"masque.jpg",False,None, None, None],  # seq 4 - reponse KO
+            [4,0,2,2,-1,None,False,"score.jpg",False,None, None, None],  # seq 5 - score
+            [0,0,0,0,-1,None,False,"vide.jpg",False,None, None, "Fin du quiz"],  # seq 6 - fin
 
 equipes=["1965","1976","1981","1998","2000","2011"]
 
@@ -158,17 +164,28 @@ class Sequence():
     vidBoucle=False
     img=None
     son=None
+    texte=None
     event=0
     noEquipe=0
+    def clear(self):  # néttoye la séquence précédente
+        if self.vid != None :
+            self.vid.close()
+        pygame.mixer.music.stop()
+        fenetre.fill((120, 120, 120))
+        pygame.display.flip()
+
     def next(self):
+        self.clear()
         self.no = self.no + 1
         self.action()
     def prev(self):
+        self.clear()
         self.no=self.no-1
         if self.no < 0:
             self.no=0
         self.action()
     def raz(self):
+        self.clear()
         self.no=0
         self.noEquipe=0
         self.action()
@@ -186,11 +203,16 @@ class Sequence():
         Voltmetre(actionSequence[self.no][2])
         Convecteur(actionSequence[self.no][3])
         self.event=actionSequence[self.no][4]
+
         if actionSequence[self.no][5] == None:
             self.vid=None
             self.vidBoucle=False
         else:
-            self.vid=Video("./videos/" + actionSequence[self.no][5])
+            if self.no == 11:   # choix année
+                self.vid=Video("./videos/LA MACHINE Année " + equipes[self.noEquipe] + ".avi")
+            else:
+                self.vid=Video("./videos/" + actionSequence[self.no][5])
+                print("video = " + actionSequence[self.no][5])
             self.vidBoucle=actionSequence[self.no][6]
         if actionSequence[self.no][7] == None:  # image
             self.img=None
@@ -201,23 +223,38 @@ class Sequence():
             pygame.mixer.music.load('./sons/' + actionSequence[self.no][8])
             pygame.mixer.music.play()
 
-
+        self.texte = actionSequence[self.no][9]
         # actions spécifiques
-        if self.no==8 and isCamera1:  # prise des photos
+        if self.no==7 and isCamera1:  # prise des photos
             image1 = cam1.get_image()
-            pygame.image.save(image1, "./images/photo1.png")
+            pygame.image.save(image1, "./images/photo_" + equipes[self.noEquipe] + ".jpg")
+            # compose le résultat
+            background = Image.open('./images/fond.jpg').convert('RGBA')
+            masque = Image.open('./images/masquePhoto.png').convert('RGBA')
+            annee = Image.open('./images/' + equipes[self.noEquipe] + '.png').convert('RGBA')
+            photo = Image.open('./images/photo_' + equipes[self.noEquipe] + '.jpg')
 
-        if self.no==8 and isCamera2:  # prise des photos
+            background.paste(photo,(362,441))
+            background.alpha_composite(masque)
+            background.alpha_composite(annee,(850,120))
+            background.save("./images/impression.png")
+            background.save("./images/impression_" + equipes[self.noEquipe] + ".png")
+
+
+
+        if self.no==7 and isCamera2:  # prise des photos
             image2 = cam2.get_image()
-            pygame.image.save(image2, "./images/photo2.png")
-
-        if self.no==12:
-            impression(equipes[self.noEquipe])
+            pygame.image.save(image2, "./images/photo2.jpg")
 
         if self.no==13:
-            #fin du jeu : on passe à l'équipe suivante
-            self.no=0
+            impression(equipes[self.noEquipe])
+
+        if self.no==14:
+            #fin du jeu : on passe à l'équipe suivant
             self.noEquipe = self.noEquipe + 1
+            self.clear()
+            self.no=0
+            self.action()
 
         #elif self.no==1:
         #elif self.no==2:
@@ -282,12 +319,12 @@ quiz = Quiz()
 
 # serveur HTTP endPoint
 class Serv(BaseHTTPRequestHandler):
-    global seq
-    global quiz
-    global mode
+
     def do_GET(self):
 
        print(self.path)
+       #query = urlparse(self.path).query
+       #print(query)
        retour = True  # par defaut
 
        if self.path == '/info':
@@ -302,16 +339,18 @@ class Serv(BaseHTTPRequestHandler):
 
        elif self.path =='/modeAnnee':
            print("passe en mode année")
-           pygame.event.Event(pygame.USEREVENT, EVENT_MODEANNEE)
+           evt = pygame.event.Event(EVENT_MODE, noMode=MODEANNEE)
+           pygame.event.post(evt)
            #mode=MODEANNEE
            #seq.raz()
        elif self.path =='/modeQuiz':
            print("passe en mode Quiz")
-           pygame.event.Event(pygame.USEREVENT, EVENT_MODEQUIZ)
-           mode=MODEQUIZ
-           quiz.raz()
+           evt = pygame.event.Event(EVENT_MODE, noMode=MODEQUIZ)
+           pygame.event.post(evt)
+
        elif self.path == '/setEquipe':
            evt = pygame.event.Event(EVENT_EQUIPE, no=123)
+           pygame.event.post(evt)
        elif self.path == '/':
            print("Ne doit pas arriver")
            retour=False
@@ -320,11 +359,13 @@ class Serv(BaseHTTPRequestHandler):
            my_event = pygame.event.Event(QUIT)
            pygame.event.post(my_event)
        elif self.path == '/next':
-           pygame.event.Event(pygame.USEREVENT, EVENT_NEXT)
+           evt = pygame.event.Event(EVENT_NEXT)
+           pygame.event.post(evt)
        elif self.path == '/prev':
-           pygame.event.Event(pygame.USEREVENT, EVENT_PREV)
+           evt = pygame.event.Event(EVENT_PREV)
+           pygame.event.post(evt)
        elif self.path == '/raz':
-           pygame.event.Event(pygame.USEREVENT, EVENT_RAZ)
+           evt = pygame.event.Event(EVENT_RAZ)
 
        if retour:
                 self.send_response(200)
@@ -349,15 +390,8 @@ class Serv(BaseHTTPRequestHandler):
 def impression(annee):
     pdf = FPDF(orientation="P", unit="mm", format=(150,100))
     pdf.add_page()
-    #pdf.add_font("BTTF","","./font/BTTF.ttf")
-    #pdf.set_font('BTTF', size=12)
-    pdf.add_font("ARIAL_TTF","","./font/arial.ttf")
-    pdf.set_font('ARIAL_TTF',"",14)
 
-    pdf.image("images/photo_" + annee + ".jpg", x=30, y=35, w=111, h=56)
-    pdf.image("images/masquePhoto.png", x=0, y=0, w=150, h=100)
-    with pdf.rotation(angle=-11, x=0, y=0):
-        pdf.text(80,0.4,annee)
+    pdf.image("images/impression_" + annee + ".png", x=0, y=0, w=150, h=100)
 
     pdf.output("./temp/impression" + annee + ".pdf")
     if isImprimante:
@@ -432,51 +466,76 @@ try:
     pygame.display.flip()
 
     seq.raz()
-    quiz.raz()
+    #quiz.raz()
 
 
     while loop:
         # gestion des evenements
         for event in pygame.event.get():
-            eventno=checkEvent(event)
-            if eventno > 0:
-                print(eventno)
+            if event.type == EVENT_MODE:
+                mode=event.noMode
+                if mode==MODEQUIZ :
+                    quiz.raz()
+                else:
+                    seq.raz()
 
-                if mode==MODEQUIZ:
-                    if quiz.event==-1:  # all event
-                        quiz.next()
-                    elif quiz.event==eventno:
-                        quiz.next()
-                    else:
-                        # erreur de bouton
-                        if nbErreur > 2:
-                            boucleParadoxeTemporel()
-                            nbErreur=0  # réinitialise le compteur
-                        else:
-                            pygame.mixer.music.load('./sons/Klaxon enrhumé.mp3')
-                            pygame.mixer.music.play()
-                            nbErreur=nbErreur+1
-                else:  # MODEANNEE
-
-                    if seq.event==-1:  # all event
-                        seq.next()
-                    elif seq.event==eventno:
-                        seq.next()
-                    else:
-                        # erreur de bouton
-                        if nbErreur > 2:
-                            boucleParadoxeTemporel()
-                            nbErreur=0  # réinitialise le compteur
-                        else:
-                            pygame.mixer.music.load('./sons/Klaxon enrhumé.mp3')
-                            pygame.mixer.music.play()
-                            nbErreur=nbErreur+1
-
-            if event.type == QUIT:
+            elif event.type==  EVENT_PREV:
+                if mode==MODEQUIZ :
+                    quiz.prev()
+                else:
+                    seq.prev()
+            elif event.type==  EVENT_NEXT:
+                if mode==MODEQUIZ :
+                    quiz.next()
+                else:
+                    seq.next()
+            elif event.type==  EVENT_RAZ:
+                if mode==MODEQUIZ :
+                    quiz.raz()
+                else:
+                    seq.raz()
+            elif event.type== EVENT_EQUIPE:
+                if mode==MODEQUIZ :
+                    quiz.noEquipe=event.noEquipe
+                else:
+                    seq.noEquipe=event.noEquipe
+            elif event.type == QUIT:
                 print("exit")
                 loop=False
+            else:
+                eventno=checkEvent(event)
+                if eventno > 0:
+                    print(eventno)
 
+                    if mode==MODEQUIZ:
+                        if quiz.event==-1:  # all event
+                            quiz.next()
+                        elif quiz.event==eventno:
+                            quiz.next()
+                        elif eventno != 6:   # par d'erreur au relachement du démarreur
+                            # erreur de bouton
+                            if nbErreur > 2:
+                                boucleParadoxeTemporel()
+                                nbErreur=0  # réinitialise le compteur
+                            else:
+                                pygame.mixer.music.load('./sons/Klaxon enrhumé.mp3')
+                                pygame.mixer.music.play()
+                                nbErreur=nbErreur+1
+                    else:  # MODEANNEE
 
+                        if seq.event==-1:  # all event
+                            seq.next()
+                        elif seq.event==eventno:
+                            seq.next()
+                        elif eventno != 6:   # par d'erreur au relachement du démarreur
+                            # erreur de bouton
+                            if nbErreur > 2:
+                                boucleParadoxeTemporel()
+                                nbErreur=0  # réinitialise le compteur
+                            else:
+                                pygame.mixer.music.load('./sons/Klaxon enrhumé.mp3')
+                                pygame.mixer.music.play()
+                                nbErreur=nbErreur+1
 
         clock.tick(30)
         pygame.display.update()
@@ -485,11 +544,22 @@ try:
             seq.vid.draw(fenetre, (0,0), force_draw=False)
 
             if seq.vid.isEnd():
-                seq.vid.close()
-                EnCours = False
+                if seq.vidBoucle:
+                    seq.vid.restart()
+                else:
+                    seq.vid.close()
+                    seq.next()
 
         if seq.img != None:
             fenetre.blit(seq.img, (0,0))
+        if seq.texte != None:
+            textRect = pygame.Rect(100, 1080-300, 1920-200,1080-100)
+            drawtext.drawText(fenetre, seq.texte, (255,255,255), textRect, font, drawtext.textAlignCenter, True)
+
+        if seq.no == 8 and isCamera1:
+            image = cam1.get_image()
+            fenetre.blit(image, (100, 100))
+
 except ValueError as e:
     print("erreur : ", e)
     pass
