@@ -152,11 +152,29 @@ actionQuiz=[[0,0,0,0,-1,None,False,"QUIZ de Garde 1.jpg",False,None, None, "Appu
             [2,0,2,2,5,None,False,"masque.jpg",False,None, None, None],  # seq 3 - reponse OK
             [3,1,2,2,5,None,False,"masque.jpg",False,None, None, None],  # seq 4 - reponse KO
             [4,0,2,2,-1,None,False,"score.jpg",False,None, None, None],  # seq 5 - score
-            [0,0,0,0,-1,None,False,"vide.jpg",False,None, None, "Fin du quiz"],  # seq 6 - fin
+            [0,0,0,0,-1,None,False,"vide.jpg",False,None, None, "Fin du quiz"]]  # seq 6 - fin
 
 equipes=["1965","1976","1981","1998","2000","2011"]
 
 scoreEquipe=[0,0,0,0,0,0]
+
+def photo(noEquipe):
+    image1 = cam1.get_image()
+    pygame.image.save(image1, "./images/photo_" + equipes[noEquipe] + ".jpg")
+    # compose le résultat
+    background = Image.open('./images/fond.jpg').convert('RGBA')
+    masque = Image.open('./images/masquePhoto.png').convert('RGBA')
+    annee = Image.open('./images/' + equipes[noEquipe] + '.png').convert('RGBA')
+    photo = Image.open('./images/photo_' + equipes[noEquipe] + '.jpg')
+
+    background.paste(photo,(362,441))
+    background.alpha_composite(masque)
+    background.alpha_composite(annee,(850,120))
+    background.save("./images/impression.png")
+    background.save("./images/impression_" + equipes[noEquipe] + ".png")
+
+
+
 
 class Sequence():
     no=0
@@ -226,21 +244,7 @@ class Sequence():
         self.texte = actionSequence[self.no][9]
         # actions spécifiques
         if self.no==7 and isCamera1:  # prise des photos
-            image1 = cam1.get_image()
-            pygame.image.save(image1, "./images/photo_" + equipes[self.noEquipe] + ".jpg")
-            # compose le résultat
-            background = Image.open('./images/fond.jpg').convert('RGBA')
-            masque = Image.open('./images/masquePhoto.png').convert('RGBA')
-            annee = Image.open('./images/' + equipes[self.noEquipe] + '.png').convert('RGBA')
-            photo = Image.open('./images/photo_' + equipes[self.noEquipe] + '.jpg')
-
-            background.paste(photo,(362,441))
-            background.alpha_composite(masque)
-            background.alpha_composite(annee,(850,120))
-            background.save("./images/impression.png")
-            background.save("./images/impression_" + equipes[self.noEquipe] + ".png")
-
-
+            photo(self.noEquipe)
 
         if self.no==7 and isCamera2:  # prise des photos
             image2 = cam2.get_image()
