@@ -42,6 +42,16 @@ pygame.mixer.init()
 MODEANNEE=0
 MODEQUIZ=1
 
+# evenements synchro
+EVENT_MODEANNEE=pygame.USEREVENT + 1
+EVENT_MODEQUIZ=pygame.USEREVENT + 2
+EVENT_PREV=pygame.USEREVENT + 3
+EVENT_NEXT=pygame.USEREVENT + 4
+EVENT_RAZ=pygame.USEREVENT + 5
+EVENT_EQUIPE=pygame.USEREVENT + 6
+
+
+
 mode=MODEANNEE
 
 
@@ -138,7 +148,7 @@ actionQuiz=[[0,0,0,0,-1,None,False,"QUIZ de Garde 1.jpg"],  # seq 0 -all bouton
                 [1,0,1,1,5,None,False,"masque.jpg"],  # seq 2 démarrage
                 [0,0,0,0,1,None,False,"vide.jpg"]]  # seq 3
 
-equipes=[1965,1976,1981,1998,2000,2011]
+equipes=["1965","1976","1981","1998","2000","2011"]
 
 scoreEquipe=[0,0,0,0,0,0]
 
@@ -202,7 +212,7 @@ class Sequence():
             pygame.image.save(image2, "./images/photo2.png")
 
         if self.no==12:
-            impression()
+            impression(equipes[self.noEquipe])
 
         if self.no==13:
             #fin du jeu : on passe à l'équipe suivante
@@ -246,7 +256,7 @@ class Quiz:
         #enregistre score equipes
         #enregistre no sequence
     def action(self):
-        print("Go sequence %d",self.no)
+        print("Go sequence ",self.no)
         Neon(actionQuiz[self.no][0])
         Ventillo(actionQuiz[self.no][1])
         Voltmetre(actionQuiz[self.no][2])
@@ -272,7 +282,9 @@ quiz = Quiz()
 
 # serveur HTTP endPoint
 class Serv(BaseHTTPRequestHandler):
-
+    global seq
+    global quiz
+    global mode
     def do_GET(self):
 
        print(self.path)
@@ -288,30 +300,18 @@ class Serv(BaseHTTPRequestHandler):
            self.end_headers()
            self.wfile.write(b"{'mode':'0', 'seq':'0', 'equipe':'0'}")
 
-       elif self.path == '/getEquipes':
-           self.send_response(200)
-           self.send_header('Access-Control-Allow-Origin', '*')
-           self.send_header('Access-Control-Allow-Methods', '*')
-           self.send_header('Access-Control-Allow-Headers', '*')
-           self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate')
-           self.send_header('Content-type','text/plain; charset=utf-8')
-           self.end_headers()
-           self.wfile.write(b"{'equipes[]'}")
-
        elif self.path =='/modeAnnee':
            print("passe en mode année")
-           mode=MODEANNEE
-           seq.raz()
+           pygame.event.Event(pygame.USEREVENT, EVENT_MODEANNEE)
+           #mode=MODEANNEE
+           #seq.raz()
        elif self.path =='/modeQuiz':
            print("passe en mode Quiz")
+           pygame.event.Event(pygame.USEREVENT, EVENT_MODEQUIZ)
            mode=MODEQUIZ
            quiz.raz()
        elif self.path == '/setEquipe':
-           if mode==MODEQUIZ:
-               quiz.noEquipe=123
-           else :
-               seq.noEquipe=123
-
+           evt = pygame.event.Event(EVENT_EQUIPE, no=123)
        elif self.path == '/':
            print("Ne doit pas arriver")
            retour=False
@@ -320,20 +320,11 @@ class Serv(BaseHTTPRequestHandler):
            my_event = pygame.event.Event(QUIT)
            pygame.event.post(my_event)
        elif self.path == '/next':
-           if mode==MODEQUIZ:
-               quiz.next()
-           else:
-                seq.next()
+           pygame.event.Event(pygame.USEREVENT, EVENT_NEXT)
        elif self.path == '/prev':
-           if mode==MODEQUIZ:
-               quiz.prev()
-           else:
-                seq.prev()
+           pygame.event.Event(pygame.USEREVENT, EVENT_PREV)
        elif self.path == '/raz':
-           if mode==MODEQUIZ:
-               quiz.raz()
-           else:
-               seq.raz()
+           pygame.event.Event(pygame.USEREVENT, EVENT_RAZ)
 
        if retour:
                 self.send_response(200)
@@ -355,16 +346,20 @@ class Serv(BaseHTTPRequestHandler):
                 self.wfile.write(b"KO")
 
 
-def impression():
-    pdf = FPDF()
+def impression(annee):
+    pdf = FPDF(orientation="P", unit="mm", format=(150,100))
     pdf.add_page()
-    pdf.add_font("BTTF","","./font/BTTF.ttf")
-    pdf.set_font('BTTF', size=12)
-    with pdf.rotation(angle=10, x=20, y=30):
-        pdf.text(10,10,"Welcome to the Machine")
-    if isCamera1:
-        pdf.image("images/photo1.png", x=50, y=60)
-    pdf.output("./temp/test.pdf")
+    #pdf.add_font("BTTF","","./font/BTTF.ttf")
+    #pdf.set_font('BTTF', size=12)
+    pdf.add_font("ARIAL_TTF","","./font/arial.ttf")
+    pdf.set_font('ARIAL_TTF',"",14)
+
+    pdf.image("images/photo_" + annee + ".jpg", x=30, y=35, w=111, h=56)
+    pdf.image("images/masquePhoto.png", x=0, y=0, w=150, h=100)
+    with pdf.rotation(angle=-11, x=0, y=0):
+        pdf.text(80,0.4,annee)
+
+    pdf.output("./temp/impression" + annee + ".pdf")
     if isImprimante:
         print("lancement de l'impression")
 
@@ -424,76 +419,80 @@ def checkEvent(event):
 
 
 print("lancement boucle")
-loop=True
-nbErreur=0
-clock = pygame.time.Clock()
-if os.getenv("ISFULLSCREEN")=="ON":
-    fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-else:
-    fenetre = pygame.display.set_mode((1200, 860))
+try:
+    loop=True
+    nbErreur=0
+    clock = pygame.time.Clock()
+    if os.getenv("ISFULLSCREEN")=="ON":
+        fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+    else:
+        fenetre = pygame.display.set_mode((1200, 860))
 
-fenetre.fill((120, 120, 120))
-pygame.display.flip()
+    fenetre.fill((120, 120, 120))
+    pygame.display.flip()
 
-seq.raz()
-quiz.raz()
+    seq.raz()
+    quiz.raz()
 
 
-while loop:
-    # gestion des evenements
-    for event in pygame.event.get():
-        eventno=checkEvent(event)
-        if eventno > 0:
-            print(eventno)
+    while loop:
+        # gestion des evenements
+        for event in pygame.event.get():
+            eventno=checkEvent(event)
+            if eventno > 0:
+                print(eventno)
 
-            if mode==MODEQUIZ:
-                if quiz.event==-1:  # all event
-                    quiz.next()
-                elif quiz.event==eventno:
-                    quiz.next()
-                else:
-                    # erreur de bouton
-                    if nbErreur > 2:
-                        boucleParadoxeTemporel()
-                        nbErreur=0  # réinitialise le compteur
+                if mode==MODEQUIZ:
+                    if quiz.event==-1:  # all event
+                        quiz.next()
+                    elif quiz.event==eventno:
+                        quiz.next()
                     else:
-                        pygame.mixer.music.load('./sons/Klaxon enrhumé.mp3')
-                        pygame.mixer.music.play()
-                        nbErreur=nbErreur+1
-            else:  # MODEANNEE
+                        # erreur de bouton
+                        if nbErreur > 2:
+                            boucleParadoxeTemporel()
+                            nbErreur=0  # réinitialise le compteur
+                        else:
+                            pygame.mixer.music.load('./sons/Klaxon enrhumé.mp3')
+                            pygame.mixer.music.play()
+                            nbErreur=nbErreur+1
+                else:  # MODEANNEE
 
-                if seq.event==-1:  # all event
-                    seq.next()
-                elif seq.event==eventno:
-                    seq.next()
-                else:
-                    # erreur de bouton
-                    if nbErreur > 2:
-                        boucleParadoxeTemporel()
-                        nbErreur=0  # réinitialise le compteur
+                    if seq.event==-1:  # all event
+                        seq.next()
+                    elif seq.event==eventno:
+                        seq.next()
                     else:
-                        pygame.mixer.music.load('./sons/Klaxon enrhumé.mp3')
-                        pygame.mixer.music.play()
-                        nbErreur=nbErreur+1
+                        # erreur de bouton
+                        if nbErreur > 2:
+                            boucleParadoxeTemporel()
+                            nbErreur=0  # réinitialise le compteur
+                        else:
+                            pygame.mixer.music.load('./sons/Klaxon enrhumé.mp3')
+                            pygame.mixer.music.play()
+                            nbErreur=nbErreur+1
 
-        if event.type == QUIT:
-            print("exit")
-            loop=False
+            if event.type == QUIT:
+                print("exit")
+                loop=False
 
 
 
-    clock.tick(30)
-    pygame.display.update()
+        clock.tick(30)
+        pygame.display.update()
 
-    if seq.vid != None:
-        seq.vid.draw(fenetre, (0,0), force_draw=False)
+        if seq.vid != None:
+            seq.vid.draw(fenetre, (0,0), force_draw=False)
 
-        if seq.vid.isEnd():
-            seq.vid.close()
-            EnCours = False
+            if seq.vid.isEnd():
+                seq.vid.close()
+                EnCours = False
 
-    if seq.img != None:
-        fenetre.blit(seq.img, (0,0))
+        if seq.img != None:
+            fenetre.blit(seq.img, (0,0))
+except ValueError as e:
+    print("erreur : ", e)
+    pass
 
 pygame.quit()
 
