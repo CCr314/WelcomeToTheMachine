@@ -1,0 +1,98 @@
+[
+  {
+    "question": "Sur quel célèbre monument parisien était-il écrit 'Merci Zizou' le dimanche 12 juillet 1998 ?",
+    "image" : "facile.png",
+    "reponse": 2,
+    "choix" : ["La tour Eiffel" , "Les Champs-Elysées" , "L'arc de Triomphe", "La mairie de Paris"]
+  },
+  {
+    "question": "Qui est président des États-Unis en 1998 ?",
+    "image" : "homme.png",
+    "reponse": 0,
+    "choix" : ["Bill Clinton" , "George W. Bush" , "Ronald Reagan", "Richard Nixon"]
+  },
+  {
+    "question": "Quel chanteur est décédé le 13 août 1998 ?",
+    "image" : "homme.png",
+    "reponse": 2,
+    "choix" : ["Claude François" , "Léo Ferré" , "Nino Ferrer", "Claude Nougaro"]
+  },
+  {
+    "question": "Qui est le Premier ministre en France en 1998 ?",
+    "image" : "doute.png",
+    "reponse": 0,
+    "choix" : ["Lionel Jospin" , "Laurent Fabius" , "Jean-François Copé", "Jacques Chirac"]
+  },
+  {
+    "question": "Qui a réalisé le film \"\"Il faut sauver le soldat Ryan\"\" sorti en 1998 ?",
+    "image" : "peur.png",
+    "reponse": 2,
+    "choix" : ["Stephen Frears" , "Steven Soderbergh" , "Steven Spielberg", "Stephen Daldry"]
+  },
+  {
+    "question": "Quel jeu télévisé apparaît sur TF1 en 1998 ?",
+    "image" : "sourire.png",
+    "reponse": 2,
+    "choix" : ["La Roue de la Fortune" , "Le Juste Prix" , "Le Bigdil", "Qui veut gagner des millions ?"]
+  },
+  {
+    "question": "Quelle chanteuse interprète \"\"Tu m'oublieras\"\" en 1998 ?",
+    "image" : "femme.png",
+    "reponse": 1,
+    "choix" : ["Ophélie Winter" , "Larusso" , "Lorie", "Jennifer"]
+  },
+  {
+    "question": "Lequel de ces films d'animations Disney est sorti en 1998 ?",
+    "image" : "reflexion.png",
+    "reponse": 0,
+    "choix" : ["Mulan" , "Rox et Rouky" , "Le Roi Lion", "Tron"]
+  },
+  {
+    "question": "Où se sont déroulés les Jeux olympiques d'hiver de 1998 ?",
+    "image" : "peur.png",
+    "reponse": 2,
+    "choix" : ["Mexique" , "Chine" , "Japon", "Argentine"]
+  },
+  {
+    "question": "Quel film français se classe juste derrière \"\"Titanic\"\" au box-office français ?",
+    "image" : "sourire.png",
+    "reponse": 1,
+    "choix" : ["Argentine" , "Le Diner de Cons" , "Les Visiteurs II", "Le 5ème élément"]
+  },
+  {
+    "question": "Que signifie \"\"L'Accord de Belfast\"\" signé en 1998 ?",
+    "image" : "doute.png",
+    "reponse": 0,
+    "choix" : ["la fin à des dizaines d’années de conflit" , "l'absence de frontières entre les 2 états irlandais" , "une équipe nationale commune dans les sports collectifs", "la libération de prisonniers"]
+  },
+  {
+    "question": "Quel moteur de recherche apparait en 1998 ?",
+    "image" : "facile.png",
+    "reponse": 2,
+    "choix" : ["Copernic" , "Yahoo" , "Google", "Qwant"]
+  },
+  {
+    "question": "Quelle petite voiture est sortie en 1998 ?",
+    "image" : "doute.png",
+    "reponse": 1,
+    "choix" : ["La Twingo" , "La Smart" , "La Topolino", "Ligier Myli"]
+  },
+  {
+    "question": "Par quoi la gare de Limoges a-t-elle été détruite en 1998 ?",
+    "image" : "peur.png",
+    "reponse": 0,
+    "choix" : ["Par un incendie" , "Par une tornade" , "Par un attentat", "Par un tremblement de terre"]
+  },
+  {
+    "question": "Après combien de jours de vol, le ballon de Richard Branson est-il tombé dans le Pacifique, en 1998 ?",
+    "image" : "reflexion.png",
+    "reponse": 2,
+    "choix" : ["5 jours" , "7 jours" , "9 jours", "11 jours"]
+  },
+  {
+    "question": "Avec quelle arme en main Laura Flessel a-t-elle été championne du monde d'escrime en 1998 ?",
+    "image" : "femme.png",
+    "reponse": 1,
+    "choix" : ["Le sabre" , "L'épée" , "Le fleuret", "L'estramaçon"]
+  }
+]

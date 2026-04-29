@@ -209,6 +209,7 @@ tempCodeRunnerFile.py
 
 # PyPI configuration file
 .pypirc
+token
 
 # Marimo
 marimo/_static/
@@ -218,9 +219,7 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-# multimedia
-**/*.mp4
-**/*.mp3
-**/*.avi
-**/*.wav
-**/*.pdf
+# video
+*.mp4
+*.avi
+*.zip
