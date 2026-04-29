@@ -2,6 +2,11 @@
 import pygame
 import pygame.camera
 from pygame.locals import *
+import serveurweb
+
+import constantes as const
+
+import peripheriques
 
 #images
 from PIL import Image
@@ -9,12 +14,7 @@ import drawtext
 
 # httpserver
 import threading
-import requests
 
-# http client
-import urllib.request
-
-from http.server import HTTPServer, BaseHTTPRequestHandler
 
 # variables
 from dotenv import load_dotenv
@@ -43,20 +43,6 @@ if isJoystick:
 
 pygame.mixer.init()
 
-MODEANNEE=0
-MODEQUIZ=1
-
-# evenements synchro
-EVENT_MODE=pygame.USEREVENT + 1
-EVENT_PREV=pygame.USEREVENT + 2
-EVENT_NEXT=pygame.USEREVENT + 3
-EVENT_RAZ=pygame.USEREVENT + 4
-EVENT_EQUIPE=pygame.USEREVENT + 5
-EVENT_TEXTE=pygame.USEREVENT + 6
-
-mode=MODEANNEE
-
-
 # vairables d'environnement
 load_dotenv()
 
@@ -64,10 +50,6 @@ isCamera1 = os.getenv("ISCAMERA1")=="ON"
 isCamera2 = os.getenv("ISCAMERA2")=="ON"
 isCamera=isCamera1 or isCamera2
 isImprimante = os.getenv("ISPRINT")=="ON"
-URI_Convecteur= os.getenv("URI_Convecteur")
-URI_Pupitre=os.getenv("URI_Pupitre")
-
-
 
 if isCamera:
     camlist = pygame.camera.list_cameras()
@@ -80,82 +62,34 @@ if isCamera:
         cam2.start()
 
 
-def Neon(no):
-    if no==0:
-        print("eteint Néon")
-        contents = urllib.request.urlopen(URI_Convecteur + "/neon/off").read()
-        print(contents)
-    else:
-        print("alume neon %d",no)
-        contents = urllib.request.urlopen(URI_Convecteur + "/neon/" + str(no) + "/on").read()
-        print(contents)
-
-def Ventillo(on):
-    if on:
-        print("ventillo on")
-        contents = urllib.request.urlopen(URI_Convecteur + "/ventillo/on").read()
-        print(contents)
-    else:
-        print("ventillo off")
-        contents = urllib.request.urlopen(URI_Convecteur + "/ventillo/off").read()
-        print(contents)
-
-def Voltmetre(action):
-    if action==0:
-        print("arret voltmettre")
-        contents = urllib.request.urlopen(URI_Pupitre + "/voltmetre/stop").read()
-        print(contents)
-    elif action==1:
-        print("demarrage voltmetre")
-        contents = urllib.request.urlopen(URI_Pupitre + "/voltmetre/start").read()
-        print(contents)
-    elif action==2:
-        print("voltmetre on")
-        contents = urllib.request.urlopen(URI_Pupitre + "/voltmetre/run").read()
-        print(contents)
-
-
-def Convecteur(action):
-    if action==0:
-        print("arret Convecteur")
-        contents = urllib.request.urlopen(URI_Convecteur + "/stop").read()
-        print(contents)
-    elif action==1:
-        print("demarrage Convecteur")
-        contents = urllib.request.urlopen(URI_Convecteur + "/start").read()
-        print(contents)
-    elif action==2:
-        print("Convecteur on")
-        contents = urllib.request.urlopen(URI_Convecteur + "/run").read()
-        print(contents)
-
             # neon, Ventillo, Voltmetre, Convecteur, noEvent, video,boucle,image, son, texte, timer
 actionSequence=[[0,0,0,0,-1,"Teasing 60 v3.1.mp4",False,None, None, "Appuyez sur un bouton",0],  # seq 0 -all bouton - boucle d'attente
                 [0,0,0,0,5,"THE MACHINE Intro Complete.mp4",True,None, None, None,0],  # seq 1 - intro
                 [1,0,1,1,5,"Les Fous du Volant (démarreur 1).mp4",False,None, None, None,0],  # seq 2 - demarreur 1
                 [1,0,1,1,5,"THE TIME MACHINE (démarreur 2).mp4",False,None, None, None,0],  # seq 3- demarreur 2
                 [1,0,2,2,0,"Retour vers le futur (démarreur 3).mp4",False,None, None, None,0],  # seq 4 - demarreur 3
-                [0,0,2,2,1,"ChoixAnneeAvantTirage.mp4",False,None, None,"Appuyez sur le bouton A",4],  # seq 5 - intro photo
+                [0,0,2,2,1,"LA MACHINE FIXE 2026 avant tirage.mp4",False,None, None,"Appuyez sur le bouton A",4],  # seq 5 - intro photo
                 [2,1,2,2,1,None,False,"masqueCamera.png", None, "A pour prendre la photo",4],  # seq 6
                 [2,0,2,2,2,None,False,"impression.png", None, "A pour reprendre la photo, B pour poursuivre",3],  # seq 7  TODO gestion du Retry
-                [3,0,2,2,3,"ChoixAnneeAvantTirage.mp4",True,None, None, "Appuyez sur le bouton C",2],  # seq 8 - intro choix annéee
+                [3,0,2,2,3,"LA MACHINE FIXE 2026 avant tirage.mp4",True,None, None, "Appuyez sur le bouton C",2],  # seq 8 - intro choix annéee
                 [3,0,2,2,4,"LA MACHINE Année 1976.avi",False,None, None, None,0],  # seq 9 - choix année
                 [4,0,2,2,-1,None,False,"impression.png", "Back To The Future - Overture.mp3", "Prendre la carte et la fiche mission",2],  # seq 10 - impression de la mission
                 [0,0,0,0,-1,None,False,None, None, "Fin de la mission",0]]  # seq 11 - fin est retour au debut
 
-actionQuiz=[[0,0,0,0,-1,None,False,"QUIZ de Garde 1.jpg",False,None, None, "Appuyez sur un bouton"],  # seq 0 -all bouton
-            [0,0,1,1,5,None,True,"QUIZ de Garde 2.jpg",False,None, None, "Demarrez"],  # seq 1
-            [1,0,2,2,5,None,False,"masque.jpg",False,None, None, None],  # seq 2 - question
-            [2,0,2,2,5,None,False,"masque.jpg",False,None, None, None],  # seq 3 - reponse OK
-            [3,1,2,2,5,None,False,"masque.jpg",False,None, None, None],  # seq 4 - reponse KO
-            [4,0,2,2,-1,None,False,"score.jpg",False,None, None, None],  # seq 5 - score
-            [0,0,0,0,-1,None,False,"vide.jpg",False,None, None, "Fin du quiz"]]  # seq 6 - fin
+actionQuiz=[[0,0,0,0,-1,None,False,"quiz/QUIZ de Garde 1.png", None, "Appuyez sur un bouton",0],  # seq 0 -all bouton
+            [0,0,1,1,5,None,True,"quiz/QUIZ de Garde 2.png", None, "Demarrez",0],  # seq 1
+            [1,0,2,2,5,None,False,"quiz/QUIZ Masque.png",None,None, 0],  # seq 2 - question
+            [2,0,2,2,5,None,False,"quiz/QUIZ Masque.png",None,None, 0],  # seq 3 - reponse OK
+            [3,1,2,2,5,None,False,"quiz/QUIZ Masque.png",None,None, 0],  # seq 4 - reponse KO
+            [4,0,2,2,-1,None,False,"quiz/QUIZ de score.png",None,None, 0],  # seq 5 - score
+            [0,0,0,0,-1,None,False,"vide.jpg",None, "Fin du quiz",0]]  # seq 6 - fin
 
 equipes=["1965","1998","1976","1981","2011","2000"]
 
 scoreEquipe=[0,0,0,0,0,0]
 
 def photo(noEquipe):
+    print("prise de photo et composition images pour ecran")
     image1 = cam1.get_image()
     pygame.image.save(image1, "./images/photo_" + equipes[noEquipe] + ".jpg")
     # compose le résultat
@@ -187,7 +121,7 @@ class Sequence():
         if self.vid != None :
             self.vid.close()
         pygame.mixer.music.stop()
-        fenetre.fill((120, 120, 120))
+        fenetre.fill((0,0,0))
         pygame.display.flip()
 
     def next(self):
@@ -214,12 +148,36 @@ class Sequence():
         #enregistre no sequence
     def action(self):
         print("Go sequence",self.no)
-        print(self.actionTable)
-        Neon(self.actionTable[self.no][0])
-        Ventillo(self.actionTable[self.no][1])
-        Voltmetre(self.actionTable[self.no][2])
-        Convecteur(self.actionTable[self.no][3])
+        peripheriques.Neon(self.actionTable[self.no][0])
+        peripheriques.Ventillo(self.actionTable[self.no][1])
+        peripheriques.Voltmetre(self.actionTable[self.no][2])
+        peripheriques.Convecteur(self.actionTable[self.no][3])
         self.event=self.actionTable[self.no][4]
+
+
+        # actions spécifiques : doit être fait avant (notament pour les photos) l'affichage du contenu de l'écran
+        if self.no==7 and isCamera1:  # prise des photos
+            photo(self.noEquipe)
+
+        if self.no==7 and isCamera2:  # prise des photos
+            image2 = cam2.get_image()
+            pygame.image.save(image2, "./images/photo2.jpg")
+
+        if self.no==10:
+            impression(equipes[self.noEquipe])
+
+        if self.no==11:
+            #fin du jeu : on passe à l'équipe suivant
+            self.noEquipe = self.noEquipe + 1
+            self.clear()
+            self.no=0
+            self.action()
+
+        #elif self.no==1:
+        #elif self.no==2:
+        #elif self.no==3:
+        #else:
+
 
         if self.actionTable[self.no][5] == None:
             self.vid=None
@@ -247,104 +205,13 @@ class Sequence():
 
         if self.actionTable[self.no][10] > 0:   # texte
             self.texte = None
-            pygame.time.set_timer(EVENT_TEXTE,self.actionTable[self.no][10]*1000)
+            pygame.time.set_timer(const.EVENT_TEXTE,self.actionTable[self.no][10]*1000)
         else:
             self.texte = self.actionTable[self.no][9]
-        # actions spécifiques
-        if self.no==7 and isCamera1:  # prise des photos
-            photo(self.noEquipe)
-
-        if self.no==7 and isCamera2:  # prise des photos
-            image2 = cam2.get_image()
-            pygame.image.save(image2, "./images/photo2.jpg")
-
-        if self.no==10:
-            impression(equipes[self.noEquipe])
-
-        if self.no==11:
-            #fin du jeu : on passe à l'équipe suivant
-            self.noEquipe = self.noEquipe + 1
-            self.clear()
-            self.no=0
-            self.action()
-
-        #elif self.no==1:
-        #elif self.no==2:
-        #elif self.no==3:
-        #else:
 
         self.flush()
 
 seq=Sequence()
-
-# serveur HTTP endPoint
-class Serv(BaseHTTPRequestHandler):
-
-    def do_GET(self):
-
-       print(self.path)
-       #query = urlparse(self.path).query
-       #print(query)
-       retour = True  # par defaut
-
-       if self.path == '/info':
-           self.send_response(200)
-           self.send_header('Access-Control-Allow-Origin', '*')
-           self.send_header('Access-Control-Allow-Methods', '*')
-           self.send_header('Access-Control-Allow-Headers', '*')
-           self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate')
-           self.send_header('Content-type','text/plain; charset=utf-8')
-           self.end_headers()
-           self.wfile.write(b"{'mode':'0', 'seq':'0', 'equipe':'0'}")
-
-       elif self.path =='/modeAnnee':
-           print("passe en mode année")
-           evt = pygame.event.Event(EVENT_MODE, noMode=MODEANNEE)
-           pygame.event.post(evt)
-           #mode=MODEANNEE
-           #seq.raz()
-       elif self.path =='/modeQuiz':
-           print("passe en mode Quiz")
-           evt = pygame.event.Event(EVENT_MODE, noMode=MODEQUIZ)
-           pygame.event.post(evt)
-
-       elif self.path == '/setEquipe':
-           evt = pygame.event.Event(EVENT_EQUIPE, no=123)
-           pygame.event.post(evt)
-       elif self.path == '/':
-           print("Ne doit pas arriver")
-           retour=False
-       elif self.path == '/quit':
-           retour=True
-           my_event = pygame.event.Event(QUIT)
-           pygame.event.post(my_event)
-       elif self.path == '/next':
-           evt = pygame.event.Event(EVENT_NEXT)
-           pygame.event.post(evt)
-       elif self.path == '/prev':
-           evt = pygame.event.Event(EVENT_PREV)
-           pygame.event.post(evt)
-       elif self.path == '/raz':
-           evt = pygame.event.Event(EVENT_RAZ)
-
-       if retour:
-                self.send_response(200)
-                self.send_header('Access-Control-Allow-Origin', '*')
-                self.send_header('Access-Control-Allow-Methods', '*')
-                self.send_header('Access-Control-Allow-Headers', '*')
-                self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate')
-                self.send_header('Content-type','text/plain; charset=utf-8')
-                self.end_headers()
-                self.wfile.write(b"OK")
-       else:
-                self.send_response(400)
-                self.send_header('Access-Control-Allow-Origin', '*')
-                self.send_header('Access-Control-Allow-Methods', '*')
-                self.send_header('Access-Control-Allow-Headers', '*')
-                self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate')
-                self.send_header('Content-type','text/plain; charset=utf-8')
-                self.end_headers()
-                self.wfile.write(b"KO")
 
 
 def impression(annee):
@@ -358,12 +225,7 @@ def impression(annee):
         print("lancement de l'impression")
 
 print("Préparation WebServer")
-def lanceHttpServ():
-    print("lancement serveur HTTP port 8081")
-    httpd = HTTPServer(('localhost',8081),Serv)
-    httpd.serve_forever()
-
-loop_thread = threading.Thread(target=lanceHttpServ)
+loop_thread = threading.Thread(target=serveurweb.lanceHttpServ)
 loop_thread.start()
 
 
@@ -409,8 +271,10 @@ def checkEvent(event):
         value = 9 # haut
     if (event.type == KEYDOWN and event.key == 1073741905) or (event.type == JOYAXISMOTION and event.axis == 0 and event.value > 0.5):
         value = 10 # bas
-    if (event.type == KEYDOWN and event.key == 110):
+    if (event.type == KEYDOWN and event.key == 110):  # spécifique recette pour avancer vite
         value = 11 # avance
+    if (event.type == KEYDOWN and event.key == 113):  # spécifique recette pour lancer le mode quiz
+        value = 12 # quiz
     return value
 
 
@@ -424,7 +288,7 @@ try:
     else:
         fenetre = pygame.display.set_mode((1200, 860))
 
-    fenetre.fill((120, 120, 120))
+    fenetre.fill((0,0,0))
     pygame.display.flip()
 
     seq.raz()
@@ -432,23 +296,23 @@ try:
     while loop:
         # gestion des evenements
         for event in pygame.event.get():
-            if event.type == EVENT_MODE:
+            if event.type == const.EVENT_MODE:
                 mode=event.noMode
-                if mode==MODEANNEE:
+                if mode==const.MODEANNEE:
                     seq.actionTable = actionSequence
                 else:
                     seq.actionTable = actionQuiz
 
                 seq.raz()
-            elif event.type==  EVENT_PREV:
+            elif event.type==  const.EVENT_PREV:
                 seq.prev()
-            elif event.type==  EVENT_NEXT:
+            elif event.type==  const.EVENT_NEXT:
                 seq.next()
-            elif event.type==  EVENT_RAZ:
+            elif event.type==  const.EVENT_RAZ:
                 seq.raz()
-            elif event.type== EVENT_EQUIPE:
+            elif event.type== const.EVENT_EQUIPE:
                 seq.noEquipe=event.noEquipe
-            elif event.type==EVENT_TEXTE:
+            elif event.type==const.EVENT_TEXTE:
                 seq.texte = seq.actionTable[seq.no][9]
             elif event.type == QUIT:
                 print("exit")
@@ -459,6 +323,10 @@ try:
                     print(eventno)
                     if seq.event==-1 or eventno==11:  # all event ou n
                         seq.next()
+                    elif eventno==12:   # mode quiz
+                        mode=const.MODEQUIZ
+                        seq.actionTable = actionQuiz
+                        seq.raz()
                     elif seq.event==eventno:
                         seq.next()
                     elif seq.no==7 and eventno==1:
@@ -507,3 +375,6 @@ except ValueError as e:
 pygame.quit()
 
 print("fin normale du progamme")
+exit(0)
+
+
