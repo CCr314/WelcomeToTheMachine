@@ -27,13 +27,11 @@ from pyvidplayer import Video
 # FPDF et Images
 from fpdf import FPDF
 masquePhoto = Image.open('./images/masquePhotoEcran.png').convert('RGBA')
-<<<<<<< HEAD
+
 posCadre=[(160,550),(990,550),(160,740),(990,740)]
 cadreOK = pygame.image.load('./images/quiz/cadreOK.png')
 cadreKO = pygame.image.load('./images/quiz/cadreKO.png')
 cadreReponse = pygame.image.load('./images/quiz/cadreReponse.png')
-=======
->>>>>>> fbb8c6df40ec9234b7c0de02e6a2f0e80a1ed31b
 
 # initialisation des composants
 print("initialisation des objets")
@@ -43,10 +41,9 @@ pygame.camera.init()
 pygame.joystick.init()
 
 font=pygame.font.Font("./font/BTTF.ttf", 40)
-<<<<<<< HEAD
+
 fontQuiz=pygame.font.Font("./font/BTTF.ttf", 30)
-=======
->>>>>>> fbb8c6df40ec9234b7c0de02e6a2f0e80a1ed31b
+
 
 isJoystick=os.getenv("ISJOYSTICK")=="ON"
 if isJoystick:
@@ -88,7 +85,7 @@ actionSequence=[[0,0,0,0,-1,"Teasing 60 v3.1.mp4",False,None, None, "Appuyez sur
                 [4,0,2,2,-1,None,False,"impression.png", "Back To The Future - Overture.mp3", "Prendre la carte et la fiche mission",2],  # seq 10 - impression de la mission
                 [0,0,0,0,-1,None,False,None, None, "Fin de la mission",0]]  # seq 11 - fin est retour au debut
 
-<<<<<<< HEAD
+
 actionQuiz=[[0,0,0,0,-1,"Teasing 60 v3.1.mp4",False,None, None, "Appuyez sur un bouton",0],  # seq 0 -all bouton - boucle d'attente
             [0,0,0,0,-1,None,False,"quiz/QUIZ de Garde 1.png", None, "Appuyez sur un bouton",0],  # seq 1 -all bouton
             [0,0,1,1,5,None,True,"quiz/QUIZ de Garde 2.png", None, "Demarrez",0],  # seq 2
@@ -100,17 +97,6 @@ actionQuiz=[[0,0,0,0,-1,"Teasing 60 v3.1.mp4",False,None, None, "Appuyez sur un 
 
 equipes=["1965","1998","1976","1981","2011","2000"]
 mode=const.MODEANNEE
-=======
-actionQuiz=[[0,0,0,0,-1,None,False,"quiz/QUIZ de Garde 1.png", None, "Appuyez sur un bouton",0],  # seq 0 -all bouton
-            [0,0,1,1,5,None,True,"quiz/QUIZ de Garde 2.png", None, "Demarrez",0],  # seq 1
-            [1,0,2,2,5,None,False,"quiz/QUIZ Masque.png",None,None, 0],  # seq 2 - question
-            [2,0,2,2,5,None,False,"quiz/QUIZ Masque.png",None,None, 0],  # seq 3 - reponse OK
-            [3,1,2,2,5,None,False,"quiz/QUIZ Masque.png",None,None, 0],  # seq 4 - reponse KO
-            [4,0,2,2,-1,None,False,"quiz/QUIZ de score.png",None,None, 0],  # seq 5 - score
-            [0,0,0,0,-1,None,False,"vide.jpg",None, "Fin du quiz",0]]  # seq 6 - fin
-
-equipes=["1965","1998","1976","1981","2011","2000"]
->>>>>>> fbb8c6df40ec9234b7c0de02e6a2f0e80a1ed31b
 
 scoreEquipe=[0,0,0,0,0,0]
 
@@ -140,7 +126,7 @@ class Sequence():
     texte=None
     event=0
     noEquipe=0
-<<<<<<< HEAD
+
     noQuestion=-1
     noReponse=-1
     imgEquipe=None
@@ -149,25 +135,19 @@ class Sequence():
     questions=None # table des questions d'une equipe
     question=None  # question en cours
     imgEquipe=None
-=======
-    global actionSequence
-    actionTable=actionSequence  # par defaut
 
->>>>>>> fbb8c6df40ec9234b7c0de02e6a2f0e80a1ed31b
     def clear(self):  # néttoye la séquence précédente
         if self.vid != None :
             self.vid.close()
         pygame.mixer.music.stop()
         fenetre.fill((0,0,0))
         pygame.display.flip()
-<<<<<<< HEAD
+
     def go(self,cible):
         self.clear()
         self.no = cible
         self.action()
-=======
 
->>>>>>> fbb8c6df40ec9234b7c0de02e6a2f0e80a1ed31b
     def next(self):
         self.clear()
         self.no = self.no + 1
@@ -182,10 +162,9 @@ class Sequence():
         self.clear()
         self.no=0
         self.noEquipe=0
-<<<<<<< HEAD
+
         self.noQuestion=0
-=======
->>>>>>> fbb8c6df40ec9234b7c0de02e6a2f0e80a1ed31b
+
         self.action()
     def value():
         return self.no
@@ -202,7 +181,7 @@ class Sequence():
         peripheriques.Convecteur(self.actionTable[self.no][3])
         self.event=self.actionTable[self.no][4]
 
-<<<<<<< HEAD
+
         if mode==const.MODEANNEE:
             # actions spécifiques : doit être fait avant (notament pour les photos) l'affichage du contenu de l'écran
             if self.no==7 and isCamera1:  # prise des photos
@@ -264,52 +243,16 @@ class Sequence():
             if self.actionTable[self.no][5] == None:
                 self.vid=None
                 self.vidBoucle=False
-=======
 
-        # actions spécifiques : doit être fait avant (notament pour les photos) l'affichage du contenu de l'écran
-        if self.no==7 and isCamera1:  # prise des photos
-            photo(self.noEquipe)
-
-        if self.no==7 and isCamera2:  # prise des photos
-            image2 = cam2.get_image()
-            pygame.image.save(image2, "./images/photo2.jpg")
-
-        if self.no==10:
-            impression(equipes[self.noEquipe])
-
-        if self.no==11:
-            #fin du jeu : on passe à l'équipe suivant
-            self.noEquipe = self.noEquipe + 1
-            self.clear()
-            self.no=0
-            self.action()
-
-        #elif self.no==1:
-        #elif self.no==2:
-        #elif self.no==3:
-        #else:
-
-
-        if self.actionTable[self.no][5] == None:
-            self.vid=None
-            self.vidBoucle=False
-        else:
-            if self.no == 9:   # choix année
-                self.vid=Video("./videos/La Machine Année " + equipes[self.noEquipe] + " mp4.mp4")
-                self.vid.set_volume(0.5)
-
->>>>>>> fbb8c6df40ec9234b7c0de02e6a2f0e80a1ed31b
             else:
                 self.vid=Video("./videos/" + self.actionTable[self.no][5])
                 self.vid.set_volume(0.5)
                 self.vid.set_size((1920,1080))
                 print("video = " + self.actionTable[self.no][5])
-<<<<<<< HEAD
+
                 self.vidBoucle=self.actionTable[self.no][6]
 
-=======
-            self.vidBoucle=self.actionTable[self.no][6]
->>>>>>> fbb8c6df40ec9234b7c0de02e6a2f0e80a1ed31b
+
         if self.actionTable[self.no][7] == None:  # image
             self.img=None
         else:
@@ -345,11 +288,6 @@ print("Préparation WebServer")
 loop_thread = threading.Thread(target=serveurweb.lanceHttpServ)
 loop_thread.start()
 
-<<<<<<< HEAD
-26
-=======
-
->>>>>>> fbb8c6df40ec9234b7c0de02e6a2f0e80a1ed31b
 def boucleParadoxeTemporel():
     loop=True
     vid=Video("./videos/ParadoxeTemporel.mp4")
@@ -415,10 +353,7 @@ try:
     seq.raz()
 
     while loop:
-<<<<<<< HEAD
 
-=======
->>>>>>> fbb8c6df40ec9234b7c0de02e6a2f0e80a1ed31b
         # gestion des evenements
         for event in pygame.event.get():
             if event.type == const.EVENT_MODE:
@@ -427,10 +362,7 @@ try:
                     seq.actionTable = actionSequence
                 else:
                     seq.actionTable = actionQuiz
-<<<<<<< HEAD
-=======
 
->>>>>>> fbb8c6df40ec9234b7c0de02e6a2f0e80a1ed31b
                 seq.raz()
             elif event.type==  const.EVENT_PREV:
                 seq.prev()
@@ -449,7 +381,7 @@ try:
                 eventno=checkEvent(event)
                 if eventno > 0:
                     print(eventno)
-<<<<<<< HEAD
+
                     if eventno==12:   # mode quiz
                         mode=const.MODEQUIZ
                         seq.actionTable = actionQuiz
@@ -477,17 +409,8 @@ try:
                             pygame.mixer.music.set_volume(1)
                             seq.go(5)
                     elif mode==const.MODEANNEE and seq.no==7 and eventno==1:
-=======
-                    if seq.event==-1 or eventno==11:  # all event ou n
-                        seq.next()
-                    elif eventno==12:   # mode quiz
-                        mode=const.MODEQUIZ
-                        seq.actionTable = actionQuiz
-                        seq.raz()
-                    elif seq.event==eventno:
-                        seq.next()
-                    elif seq.no==7 and eventno==1:
->>>>>>> fbb8c6df40ec9234b7c0de02e6a2f0e80a1ed31b
+
+
                         seq.prev()
                     elif eventno != 6:   # par d'erreur au relachement du démarreur
                         # erreur de bouton
@@ -500,7 +423,7 @@ try:
                             pygame.mixer.music.set_volume(1)
                             nbErreur=nbErreur+1
 
-<<<<<<< HEAD
+
 
         # traitements spécifiques
         if mode==const.MODEANNEE:
@@ -572,34 +495,7 @@ try:
         clock.tick(30)
         pygame.display.update()
 
-=======
-        clock.tick(30)
-        pygame.display.update()
 
-        if seq.vid != None:
-            seq.vid.draw(fenetre, (0,0), force_draw=False)
-
-            if seq.vid.isEnd():
-                if seq.vidBoucle:
-                    seq.vid.restart()
-                else:
-                    seq.vid.close()
-                    seq.next()
-
-        if seq.no == 6 and isCamera1:
-            image = cam1.get_image()
-            image = pygame.transform.scale(image, (1050,620))
-            fenetre.blit(image, (220,100))
-
-        if seq.img != None:
-            fenetre.blit(seq.img, (0,0))
-        if seq.texte != None:
-            textRect = pygame.Rect(100, 1080-150, 1920-200,1080-50)
-            drawtext.drawText(fenetre, seq.texte, (255,255,255), textRect, font, drawtext.textAlignCenter, True)
-
-
-
->>>>>>> fbb8c6df40ec9234b7c0de02e6a2f0e80a1ed31b
 except ValueError as e:
     print("erreur : ", e)
     pass
@@ -608,8 +504,3 @@ pygame.quit()
 
 print("fin normale du progamme")
 exit(0)
-<<<<<<< HEAD
-=======
-
-
->>>>>>> fbb8c6df40ec9234b7c0de02e6a2f0e80a1ed31b
