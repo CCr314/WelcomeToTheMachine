@@ -33,9 +33,27 @@ class Serv(BaseHTTPRequestHandler):
            print("passe en mode Quiz")
            evt = pygame.event.Event(const.EVENT_MODE, noMode=const.MODEQUIZ)
            pygame.event.post(evt)
-
-       elif self.path == '/setEquipe':
-           evt = pygame.event.Event(const.EVENT_EQUIPE, no=123)
+       elif self.path =='/modeQuiz2026':
+           print("passe en mode Quiz 2026")
+           evt = pygame.event.Event(const.EVENT_MODE, noMode=const.MODEQUIZ2026)
+           pygame.event.post(evt)
+       elif self.path == '/setEquipe/0':
+           evt = pygame.event.Event(const.EVENT_EQUIPE, no=0)
+           pygame.event.post(evt)
+       elif self.path == '/setEquipe/1':
+           evt = pygame.event.Event(const.EVENT_EQUIPE, no=1)
+           pygame.event.post(evt)
+       elif self.path == '/setEquipe/2':
+           evt = pygame.event.Event(const.EVENT_EQUIPE, no=2)
+           pygame.event.post(evt)
+       elif self.path == '/setEquipe/3':
+           evt = pygame.event.Event(const.EVENT_EQUIPE, no=3)
+           pygame.event.post(evt)
+       elif self.path == '/setEquipe/4':
+           evt = pygame.event.Event(const.EVENT_EQUIPE, no=4)
+           pygame.event.post(evt)
+       elif self.path == '/setEquipe/5':
+           evt = pygame.event.Event(const.EVENT_EQUIPE, no=5)
            pygame.event.post(evt)
        elif self.path == '/':
            print("Ne doit pas arriver")
@@ -52,7 +70,6 @@ class Serv(BaseHTTPRequestHandler):
            pygame.event.post(evt)
        elif self.path == '/raz':
            evt = pygame.event.Event(const.EVENT_RAZ)
-
        if retour:
                 self.send_response(200)
                 self.send_header('Access-Control-Allow-Origin', '*')
@@ -77,4 +94,3 @@ def lanceHttpServ():
     print("lancement serveur HTTP port 8081")
     httpd = HTTPServer(('localhost',8081),Serv)
     httpd.serve_forever()
-    

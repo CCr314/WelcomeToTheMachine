@@ -36,7 +36,7 @@
     "choix" : ["France" , "Afrique du Sud" , "Angleterre", "Australie"]
   },
   {
-    "question": "Oussama Ben Laden décède en mai 2011. Quel était sa nationalité ?",*
+    "question": "Oussama Ben Laden décède en mai 2011. Quel était sa nationalité ?",
     "image" : "femme.png",
     "reponse": 1,
     "choix" : ["Pakistanais" , "Saoudien" , "Afghan", "Syrien"]
