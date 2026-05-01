@@ -19,6 +19,7 @@ import threading
 
 # variables
 from dotenv import load_dotenv
+import pickle
 import os
 
 #video
@@ -28,7 +29,6 @@ from pyvidplayer import Video
 from fpdf import FPDF
 masquePhoto = Image.open('./images/masquePhotoEcran.png').convert('RGBA')
 
-posCadre=[(160,550),(990,550),(160,740),(990,740)]
 cadreOK = pygame.image.load('./images/quiz/cadreOK.png')
 cadreKO = pygame.image.load('./images/quiz/cadreKO.png')
 cadreReponse = pygame.image.load('./images/quiz/cadreReponse.png')
@@ -43,6 +43,8 @@ pygame.joystick.init()
 font=pygame.font.Font("./font/BTTF.ttf", 40)
 
 fontQuiz=pygame.font.Font("./font/BTTF.ttf", 30)
+fontQuiz2=pygame.font.Font("./font/GODOFWAR.TTF", 30)
+
 
 
 isJoystick=os.getenv("ISJOYSTICK")=="ON"
@@ -64,7 +66,7 @@ if isCamera:
     camlist = pygame.camera.list_cameras()
     print(camlist)
     if isCamera1:
-        cam1 = pygame.camera.Camera("/dev/video0",(1270,700))
+        cam1 = pygame.camera.Camera("/dev/video0",(1300,700))
         cam1.start()
     if isCamera2:
         cam2 = pygame.camera.Camera("/dev/video2",(640,480))
@@ -72,30 +74,39 @@ if isCamera:
 
 
             # neon, Ventillo, Voltmetre, Convecteur, noEvent, video,boucle,image, son, texte, timer
-actionSequence=[[0,0,0,0,-1,"Teasing 60 v3.1.mp4",False,None, None, "Appuyez sur un bouton",0],  # seq 0 -all bouton - boucle d'attente
-                [0,0,0,0,5,"THE MACHINE Intro Complete.mp4",True,None, None, None,0],  # seq 1 - intro
-                [1,0,1,1,5,"Les Fous du Volant (démarreur 1).mp4",False,None, None, None,0],  # seq 2 - demarreur 1
-                [1,0,1,1,5,"THE TIME MACHINE (démarreur 2).mp4",False,None, None, None,0],  # seq 3- demarreur 2
-                [1,0,2,2,0,"Retour vers le futur (démarreur 3).mp4",False,None, None, None,0],  # seq 4 - demarreur 3
-                [0,0,2,2,1,"LA MACHINE FIXE 2026 avant tirage.mp4",False,None, None,"Appuyez sur le bouton A",4],  # seq 5 - intro photo
-                [2,1,2,2,1,None,False,"masqueCamera.png", None, "A pour prendre la photo",4],  # seq 6
-                [2,0,2,2,2,None,False,"impression.png", None, "A pour reprendre la photo, B pour poursuivre",3],  # seq 7  TODO gestion du Retry
+actionSequence=[[0,0,0,0,-1,"Teasing 60 v3.1.mp4",True,None, None, "Appuyez sur un bouton",0],  # seq 0 -all bouton - boucle d'attente
+                [0,0,0,0,5,"THE MACHINE Intro Complete.mp4",True,None, None, "Demarrez",70],  # seq 1 - intro
+                [1,0,1,1,5,"Les Fous du Volant (démarreur 1).mp4",False,None, None, "Echec Demarrage : réésayez",20],  # seq 2 - demarreur 1
+                [1,0,1,1,5,"THE TIME MACHINE (démarreur 2).mp4",False,None, None, "Echec Demarrage : réésayez",20],  # seq 3- demarreur 2
+                [1,0,2,2,0,"Retour vers le futur (démarreur 3).mp4",False,None, None, "Demarrage Machine OK",3],  # seq 4 - demarreur 3
+                [0,0,2,2,1,"LA MACHINE FIXE 2026 avant tirage.mp4",False,None, None,"Appuyez sur le bouton A",3],  # seq 5 - intro photo
+                [2,1,2,2,1,None,False,"masqueCamera.png", None, "A pour prendre la photo",3],  # seq 6
+                [2,0,2,2,2,None,False,"impression_%a.png", None, "A pour reprendre la photo, B pour poursuivre",3],  # seq 7  TODO gestion du Retry
                 [3,0,2,2,3,"LA MACHINE FIXE 2026 avant tirage.mp4",True,None, None, "Appuyez sur le bouton C",2],  # seq 8 - intro choix annéee
-                [3,0,2,2,4,"LA MACHINE Année 1976.avi",False,None, None, None,0],  # seq 9 - choix année
-                [4,0,2,2,-1,None,False,"impression.png", "Back To The Future - Overture.mp3", "Prendre la carte et la fiche mission",2],  # seq 10 - impression de la mission
+                [3,0,2,2,4,"tirage1976.mp4",False,None, None, "Appuyez sur le bouton D",4],  # seq 9 - choix année
+                [4,0,2,2,-1,None,False,"impression_%a_annee.png", "Back To The Future - Overture.mp3", "Prendre la carte et la fiche mission",2],  # seq 10 - impression de la mission
                 [0,0,0,0,-1,None,False,None, None, "Fin de la mission",0]]  # seq 11 - fin est retour au debut
 
 
-actionQuiz=[[0,0,0,0,-1,"Teasing 60 v3.1.mp4",False,None, None, "Appuyez sur un bouton",0],  # seq 0 -all bouton - boucle d'attente
+actionQuiz=[[0,0,0,0,-1,"Teasing 60 v3.1.mp4",True,None, None, "Appuyez sur un bouton",0],  # seq 0 -all bouton - boucle d'attente
             [0,0,0,0,-1,None,False,"quiz/QUIZ de Garde 1.png", None, "Appuyez sur un bouton",0],  # seq 1 -all bouton
             [0,0,1,1,5,None,True,"quiz/QUIZ de Garde 2.png", None, "Demarrez",0],  # seq 2
-            [1,0,2,2,5,None,False,"quiz/QUIZ Masque.png",None,None, 0],  # seq 3 - question
+            [1,0,2,2,0,None,False,"quiz/QUIZ Masque.png",None,None, 0],  # seq 3 - question
             [2,0,2,2,8,None,False,"quiz/QUIZ Masque OK.png",None,"Allez vers la droite", 3],  # seq 4 - reponse OK
             [3,1,2,2,8,None,False,"quiz/QUIZ Masque KO.png",None,"Allez vers la droite", 3],  # seq 5 - reponse KO
             [4,0,2,2,-1,None,False,"quiz/QUIZ de score.png",None,"Appuyez sur un bouton",10],  # seq 6 - score
             [0,0,0,0,-1,None,False,"vide.jpg",None, "Fin du quiz",0]]  # seq 7 - fin
 
-equipes=["1965","1998","1976","1981","2011","2000"]
+actionQuiz2026=[[0,0,0,0,-1,"ChoixAnneeAvantTirage.mp4",False,None, None, "Appuye sur un bouton",0],  # seq 0 -all bouton - boucle d'attente
+            [0,0,0,0,-1,None,False,"quiz2026/QUIZ de Garde 1.png", None, "Demarre",0],  # seq 1 - demarreur
+            [0,0,1,1,-1,"ChoixAnneeAvantTirage.mp4",False,"quiz2026/QUIZ Masque.png", None, None,0],  # seq 2 - photo ou video de la question
+            [1,0,2,2,5,None,False,"quiz2026/QUIZ Masque.png",None,None, 0],  # seq 3 - question
+            [2,0,2,2,8,None,False,"quiz2026/QUIZ Masque OK.png",None,"Va vers la droite", 3],  # seq 4 - reponse OK
+            [3,1,2,2,8,None,False,"quiz2026/QUIZ Masque KO.png",None,"Va vers la droite", 3],  # seq 5 - reponse KO
+            [4,0,2,2,-1,None,False,"quiz2026/QUIZ de score.png",None,"Appuye sur un bouton",10],  # seq 6 - score
+            [0,0,0,0,-1,None,False,"vide.jpg",None, "Fin du quiz",0]]  # seq 7 - fin
+
+equipes=["1998","1965","1976","2011","1981","2000"]
 mode=const.MODEANNEE
 
 scoreEquipe=[0,0,0,0,0,0]
@@ -105,16 +116,15 @@ def photo(noEquipe):
     image1 = cam1.get_image()
     pygame.image.save(image1, "./images/photo_" + equipes[noEquipe] + ".jpg")
     # compose le résultat
-    #background = Image.open('./images/fondEcran.jpg').convert('RGBA')
     background =Image.new('RGBA', (1920,1080), color=(255,255,255))
-    #annee = Image.open('./images/' + equipes[noEquipe] + '.png').convert('RGBA')
+    annee = Image.open('./images/' + equipes[noEquipe] + '.png').convert('RGBA')
     photo = Image.open('./images/photo_' + equipes[noEquipe] + '.jpg')
 
     background.paste(photo,(400,375))
     background.alpha_composite(masquePhoto)
-    #background.alpha_composite(annee,(850,120))
-    background.save("./images/impression.png")
     background.save("./images/impression_" + equipes[noEquipe] + ".png")
+    background.alpha_composite(annee,(950,60))
+    background.save("./images/impression_" + equipes[noEquipe] + "_annee.png")
 
 
 class Sequence():
@@ -132,12 +142,13 @@ class Sequence():
     imgEquipe=None
     global actionSequence
     actionTable=actionSequence  # par defaut
+    version=1
     questions=None # table des questions d'une equipe
     question=None  # question en cours
     imgEquipe=None
 
     def clear(self):  # néttoye la séquence précédente
-        if self.vid != None :
+        if self.vid != None:   # sauf pur le tirage de l"année
             self.vid.close()
         pygame.mixer.music.stop()
         fenetre.fill((0,0,0))
@@ -149,7 +160,8 @@ class Sequence():
         self.action()
 
     def next(self):
-        self.clear()
+        if self.no!= 8:  # pas de néttoyage pour le choix de l'année
+            self.clear()
         self.no = self.no + 1
         self.action()
     def prev(self):
@@ -163,7 +175,7 @@ class Sequence():
         self.no=0
         self.noEquipe=0
 
-        self.noQuestion=0
+        self.noQuestion=-1
 
         self.action()
     def value():
@@ -171,6 +183,9 @@ class Sequence():
     def flush(self):
         # sauvegarde l'état du jeu
         print("sauvegarde point de reprise")
+        f = open('./temp/store.pckl', 'wb')
+        pickle.dump([mode,scoreEquipe,seq.no,seq.noQuestion,seq.noEquipe],f)
+        f.close()
         #enregistre score equipes
         #enregistre no sequence
     def action(self):
@@ -206,7 +221,7 @@ class Sequence():
                 self.vidBoucle=False
             else:
                 if self.no == 9:   # choix année
-                    self.vid=Video("./videos/La Machine Année " + equipes[self.noEquipe] + " mp4.mp4")
+                    self.vid=Video("./videos/tirage" + equipes[self.noEquipe] + ".mp4")
                     self.vid.set_volume(0.5)
 
                 else:
@@ -219,11 +234,22 @@ class Sequence():
         elif mode==const.MODEQUIZ:
             if self.no==1:
                 # charge les données
-                print("charge les données de " +equipes[self.noEquipe])
-                with open("dataQuiz/table"+equipes[self.noEquipe]+".json") as f:
-                    self.questions = json.load(f)
-                self.imgEquipe = pygame.image.load('./images/' + equipes[self.noEquipe] + '.png')
-            elif self.no==3:
+                if self.version==1:
+                    print("charge les données de " +equipes[self.noEquipe])
+                    with open("dataQuiz/table"+equipes[self.noEquipe]+".json") as f:
+                        self.questions = json.load(f)
+                    self.imgEquipe = pygame.image.load('./images/' + equipes[self.noEquipe] + '.png')
+                else:
+                    print("charge les données de version 2")
+                    with open("dataQuiz/table2026.json") as f:
+                        self.questions = json.load(f)
+                    self.imgEquipe = None
+                    print(len(self.questions ))
+
+            elif self.version==1 and self.no==3:
+                self.noQuestion = self.noQuestion + 1
+                self.question = self.questions[self.noQuestion]
+            elif self.version==2 and self.no==2:
                 self.noQuestion = self.noQuestion + 1
                 self.question = self.questions[self.noQuestion]
             elif self.no==6:
@@ -231,6 +257,7 @@ class Sequence():
                 self.noQuestion = -1
             elif self.no==7:   # Fin
                 print("fin")
+                # todo gerer la fin pour les différents mode
                 if self.noEquipe >=6:
                     print("fin du jeu")
                     #todo gérer la fin du game
@@ -240,15 +267,23 @@ class Sequence():
                     self.clear()
                     self.no=0
                     self.action()
+
+            # video
             if self.actionTable[self.no][5] == None:
                 self.vid=None
                 self.vidBoucle=False
-
             else:
-                self.vid=Video("./videos/" + self.actionTable[self.no][5])
-                self.vid.set_volume(0.5)
-                self.vid.set_size((1920,1080))
-                print("video = " + self.actionTable[self.no][5])
+                if mode==const.MODEQUIZ and self.version==2 and self.no==2:
+                    if seq.question['video'] != None:
+                        print("lance video " + seq.question['video'])
+                        self.vid=Video("./videos/quiz2026/" + seq.question['video'])
+                        self.vid.set_size((1920,1080))
+                        seq.img=None
+                else:
+                    self.vid=Video("./videos/" + self.actionTable[self.no][5])
+                    self.vid.set_volume(0.5)
+                    self.vid.set_size((1920,1080))
+                    print("video = " + self.actionTable[self.no][5])
 
                 self.vidBoucle=self.actionTable[self.no][6]
 
@@ -256,7 +291,15 @@ class Sequence():
         if self.actionTable[self.no][7] == None:  # image
             self.img=None
         else:
-            self.img=pygame.image.load("./images/" + self.actionTable[self.no][7])
+            if mode==const.MODEQUIZ and self.version==2 and self.no==2:
+                if seq.question['image'] != None:
+                    print("lance image " + seq.question['image'])
+                    self.img=pygame.image.load("./videos/quiz2026/" + seq.question['image'])
+                    pygame.time.set_timer(const.EVENT_NEXT,const.TPSIMAGES*1000,True)
+                    self.vid=None
+            else:
+                print("image question" + self.actionTable[self.no][7])
+                self.img=pygame.image.load("./images/" + self.actionTable[self.no][7].replace("%a",equipes[self.noEquipe] ))
 
         if self.actionTable[self.no][8] != None:  # son
             pygame.mixer.music.load('./sons/' + self.actionTable[self.no][8])
@@ -265,7 +308,7 @@ class Sequence():
 
         if self.actionTable[self.no][10] > 0:   # texte
             self.texte = None
-            pygame.time.set_timer(const.EVENT_TEXTE,self.actionTable[self.no][10]*1000)
+            pygame.time.set_timer(const.EVENT_TEXTE,self.actionTable[self.no][10]*1000,True)
         else:
             self.texte = self.actionTable[self.no][9]
 
@@ -298,7 +341,7 @@ def boucleParadoxeTemporel():
     while loop:
         clock.tick(30)
         pygame.display.update()
-        vid.draw(fenetre, (500,400), force_draw=False)
+        vid.draw(fenetre, (200,200), force_draw=False)
 
         if vid.isEnd():
             vid.close()
@@ -350,19 +393,41 @@ try:
     fenetre.fill((0,0,0))
     pygame.display.flip()
 
-    seq.raz()
+    # recupere les variables
+    #try:
+#        f = open('./temp/store.pckl', 'rb')
+#        mode,scoreEquipe,seq.no,seq.noQuestion,seq.noEquipe = pickle.load(f)
+#        f.close()
+#        print("demarrage sequence " + str(seq.no))
+#        seq.go(seq.no)
+#    except FileNotFoundError:
+#        print("pas de fichier de récupération")
+#    except EOFError:
+#        print("fichier de récupération incorrect")
+#    finally:
+#        print("démarrage au début")
+#
 
+    seq.raz()
     while loop:
 
         # gestion des evenements
         for event in pygame.event.get():
             if event.type == const.EVENT_MODE:
+                print("change Mode")
                 mode=event.noMode
+                seq.version=1
                 if mode==const.MODEANNEE:
                     seq.actionTable = actionSequence
-                else:
+                elif mode==const.MODEQUIZ:
                     seq.actionTable = actionQuiz
-
+                    seq.version=1
+                elif mode==const.MODEQUIZ2026:
+                    print("mode 2026")
+                    fontQuiz=fontQuiz2
+                    seq.actionTable = actionQuiz2026
+                    mode=const.MODEQUIZ
+                    seq.version=2
                 seq.raz()
             elif event.type==  const.EVENT_PREV:
                 seq.prev()
@@ -371,7 +436,8 @@ try:
             elif event.type==  const.EVENT_RAZ:
                 seq.raz()
             elif event.type== const.EVENT_EQUIPE:
-                seq.noEquipe=event.noEquipe
+                print("affecte equipe " + str(event.no))
+                seq.noEquipe=event.no
             elif event.type==const.EVENT_TEXTE:
                 seq.texte = seq.actionTable[seq.no][9]
             elif event.type == QUIT:
@@ -391,10 +457,14 @@ try:
                         seq.next()
                     elif mode==const.MODEQUIZ and seq.no>=4 and seq.no<=5 and eventno==8:  # réponse à la question
                         print("question suivante")
-                        if seq.noQuestion >=15:
+                        if seq.noQuestion >= len(seq.questions)-1: # depend de la version
                             seq.go(6)
                         else:
-                            seq.go(3)
+                            if seq.version==1:
+                                seq.go(3)
+                            else:
+                                seq.go(2)
+
                     elif seq.event==eventno:
                         seq.next()
                     elif mode==const.MODEQUIZ and seq.no==3 and eventno>=1 and eventno<=4:  # réponse à la question
@@ -408,11 +478,9 @@ try:
                             pygame.mixer.music.play()
                             pygame.mixer.music.set_volume(1)
                             seq.go(5)
-                    elif mode==const.MODEANNEE and seq.no==7 and eventno==1:
-
-
+                    elif mode==const.MODEANNEE and seq.no==7 and eventno==1:  # reprendre la photo
                         seq.prev()
-                    elif eventno != 6:   # par d'erreur au relachement du démarreur
+                    elif eventno != 6:   # pas d'erreur au relachement du démarreur
                         # erreur de bouton
                         if nbErreur > 2:
                             boucleParadoxeTemporel()
@@ -464,29 +532,31 @@ try:
             if seq.img != None:  # affiche l'image de fond
                 fenetre.blit(seq.img, (0,0))
 
-            if seq.question != None:
-                # année
-
-                fenetre.blit(seq.imgEquipe, (660,140))
+            if seq.question != None and seq.no!=2:
                 # question
-                textRect = pygame.Rect(300, 320, 1920-300, 600)
-                drawtext.drawText(fenetre, seq.question['question'], (30,30,30), textRect, font, drawtext.textAlignCenter, True)
+                textRect = pygame.Rect(300, 320, 1920-600, 600)
+                drawtext.drawText(fenetre, seq.question['question'], (30,30,30), textRect, fontQuiz, drawtext.textAlignCenter, True)
                 # choix
-                position=[(280,630),(1110,630),(280,810),(1110,810)]
+
                 taille=(700,160)
                 for n in range(4):
-                    textRect = pygame.Rect(position[n],taille)
+                    textRect = pygame.Rect(const.posQuestions[n],taille)
                     drawtext.drawText(fenetre, seq.question['choix'][n], (30,30,30), textRect, fontQuiz, drawtext.textAlignLeft , True)
 
                 if seq.no==4:  # bonne reponse
-                    fenetre.blit(cadreOK, posCadre[seq.question['reponse']])
+                    fenetre.blit(cadreOK, const.posCadre[seq.question['reponse']])
                 elif seq.no==5:  # mauvaise reponse
-                    fenetre.blit(cadreReponse, posCadre[seq.question['reponse']])
-                    fenetre.blit(cadreKO, posCadre[seq.noReponse])
+                    fenetre.blit(cadreReponse, const.posCadre[seq.question['reponse']])
+                    fenetre.blit(cadreKO, const.posCadre[seq.noReponse])
             if seq.no==6:   # score
                 scoreEquipe[seq.noEquipe]
                 textRect = pygame.Rect(620, 750, 600,114 )
-                drawtext.drawText(fenetre, "Votre score : " + str(scoreEquipe[seq.noEquipe]) + "/ 16", (0,0,0), textRect, font, drawtext.textAlignCenter, True)
+                if seq.version==2:
+                    drawtext.drawText(fenetre, "ton score : " + str(scoreEquipe[seq.noEquipe]) + "/" + str(len(seq.questions)), (0,0,0), textRect, fontQuiz2, drawtext.textAlignCenter, True)
+                else:
+                    drawtext.drawText(fenetre, "Votre score : " + str(scoreEquipe[seq.noEquipe]) + "/" + str(len(seq.questions)), (0,0,0), textRect, font, drawtext.textAlignCenter, True)
+
+
 
             if seq.texte != None:
                 textRect = pygame.Rect(100, 1080-150, 1920-200,1080-50)
