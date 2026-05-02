@@ -44,6 +44,7 @@ font=pygame.font.Font("./font/BTTF.ttf", 40)
 
 fontQuiz=pygame.font.Font("./font/BTTF.ttf", 30)
 fontQuiz2=pygame.font.Font("./font/GODOFWAR.TTF", 30)
+fontQuiz3=pygame.font.Font("./font/GrimeSlime-Regular.ttf", 50)
 
 
 
@@ -535,14 +536,18 @@ try:
             if seq.question != None and seq.no!=2:
                 # question
                 textRect = pygame.Rect(300, 320, 1920-600, 600)
-                drawtext.drawText(fenetre, seq.question['question'], (30,30,30), textRect, fontQuiz, drawtext.textAlignCenter, True)
-                # choix
+                if seq.version==2:
+                    drawtext.drawText(fenetre, seq.question['question'], (30,30,30), textRect, fontQuiz3, drawtext.textAlignCenter, True)
+                else:
+                    drawtext.drawText(fenetre, seq.question['question'], (30,30,30), textRect, fontQuiz, drawtext.textAlignCenter, True)
 
                 taille=(700,160)
                 for n in range(4):
                     textRect = pygame.Rect(const.posQuestions[n],taille)
-                    drawtext.drawText(fenetre, seq.question['choix'][n], (30,30,30), textRect, fontQuiz, drawtext.textAlignLeft , True)
-
+                    if seq.version==2:
+                        drawtext.drawText(fenetre, seq.question['choix'][n], (30,30,30), textRect, fontQuiz3, drawtext.textAlignLeft , True)
+                    else:
+                        drawtext.drawText(fenetre, seq.question['choix'][n], (30,30,30), textRect, fontQuiz, drawtext.textAlignLeft , True)
                 if seq.no==4:  # bonne reponse
                     fenetre.blit(cadreOK, const.posCadre[seq.question['reponse']])
                 elif seq.no==5:  # mauvaise reponse
@@ -556,11 +561,12 @@ try:
                 else:
                     drawtext.drawText(fenetre, "Votre score : " + str(scoreEquipe[seq.noEquipe]) + "/" + str(len(seq.questions)), (0,0,0), textRect, font, drawtext.textAlignCenter, True)
 
-
-
             if seq.texte != None:
-                textRect = pygame.Rect(100, 1080-150, 1920-200,1080-50)
-                drawtext.drawText(fenetre, seq.texte, (30,30,30), textRect, font, drawtext.textAlignCenter, True)
+                textRect = pygame.Rect(100, 1080-100, 1920-200,1080-20)
+                if seq.version==2:
+                    drawtext.drawText(fenetre, seq.texte, (30,30,30), textRect, fontQuiz2, drawtext.textAlignCenter, True)
+                else:
+                    drawtext.drawText(fenetre, seq.texte, (30,30,30), textRect, font, drawtext.textAlignCenter, True)
 
         clock.tick(30)
         pygame.display.update()
