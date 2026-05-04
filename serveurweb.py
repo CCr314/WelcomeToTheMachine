@@ -3,6 +3,7 @@ import requests
 import pickle
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import constantes as const
+import peripheriques as peri
 
 
 # serveur HTTP endPoint
@@ -82,6 +83,25 @@ class Serv(BaseHTTPRequestHandler):
                pygame.event.post(evt)
            elif self.path == '/raz':
                evt = pygame.event.Event(const.EVENT_RAZ)
+           elif self.path == '/ventillo/on':
+                retour=Ventillo(True)
+           elif self.path == '/ventillo/off':
+                retour=Ventillo(False)
+           elif self.path == '/convecteur/on':
+                retour=Convecteur(True)
+           elif self.path == '/convecteur/off':
+                retour=Convecteur(False):
+           elif self.path == '/neon/1/on':
+                retour=Neon(1)
+           elif self.path == '/neon/2/on':
+                retour=Neon(2)
+           elif self.path == '/neon/3/on':
+                retour=Neon(3)
+           elif self.path == '/neon/4/on':
+                retour=Neon(4)
+           elif self.path == '/photo':
+                evt = pygame.event.Event(const.EVENT_PHOTO)
+                pygame.event.post(evt)
            if retour:
                     self.send_response(200)
                     self.send_header('Access-Control-Allow-Origin', '*')

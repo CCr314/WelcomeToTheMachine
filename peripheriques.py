@@ -19,6 +19,12 @@ def Neon(no):
         print("allume neon",no)
         contents = urllib.request.urlopen(URI_Convecteur + "/neon/" + str(no) + "/on").read()
         print(contents)
+    return True
+def NeonOff(no):
+    print("etient neon",no)
+    contents = urllib.request.urlopen(URI_Convecteur + "/neon/" + str(no) + "/off").read()
+    print(contents)
+    return True
 
 def Ventillo(on):
     if on:
@@ -29,6 +35,7 @@ def Ventillo(on):
         print("ventillo off")
         contents = urllib.request.urlopen(URI_Convecteur + "/ventillo/off").read()
         print(contents)
+    return True
 
 def Voltmetre(action):
     if action==0:
@@ -43,7 +50,7 @@ def Voltmetre(action):
         print("voltmetre on")
         contents = urllib.request.urlopen(URI_Pupitre + "/voltmetre/run").read()
         print(contents)
-
+    return True
 
 def Convecteur(action):
     if action==0:
@@ -58,4 +65,4 @@ def Convecteur(action):
         print("Convecteur on")
         contents = urllib.request.urlopen(URI_Convecteur + "/run").read()
         print(contents)
-
+    return True
