@@ -75,7 +75,7 @@ if isCamera:
         cam2.start()
 
 
-            # neon, Ventillo, Voltmetre, Convecteur, noEvent, video,boucle,image, son, texte, timer
+            # neon, Ventilo, Voltmetre, Convecteur, noEvent, video,boucle,image, son, texte, timer
 actionSequence=[[0,0,0,0,-1,"Teasing 60 v3.1.mp4",True,None, None, "Appuyez sur un bouton",0],  # seq 0 -all bouton - boucle d'attente
                 [0,0,0,0,5,"THE MACHINE Intro Complete.mp4",True,None, None, "Demarrez",70],  # seq 1 - intro
                 [1,0,1,1,5,"Les Fous du Volant (démarreur 1).mp4",False,None, None, "Echec Demarrage : réésayez",20],  # seq 2 - demarreur 1
@@ -99,7 +99,7 @@ actionQuiz=[[0,0,0,0,-1,"Teasing 60 v3.1.mp4",True,None, None, "Appuyez sur un b
             [4,0,2,2,-1,None,False,"quiz/QUIZ de score.png",None,"Appuyez sur un bouton",10],  # seq 6 - score
             [0,0,0,0,-1,None,False,"vide.jpg",None, "Fin du quiz",0]]  # seq 7 - fin
 
-# neon, Ventillo, Voltmetre, Convecteur, noEvent, video,boucle,image, son, texte, timer
+# neon, Ventilo, Voltmetre, Convecteur, noEvent, video,boucle,image, son, texte, timer
 actionQuiz2026=[[0,0,0,0,-1,"IntroQuizPhilippe.mp4",True,None, None, "Appuye sur un bouton",0],  # seq 0 -all bouton - boucle d'attente
             [0,0,0,0,-1,None,False,"quiz2026/QUIZ de Garde 1.png", None, "Demarre",0],  # seq 1 - demarreur
             [0,0,1,1,-1,"LA MACHINE FIXE 2026 avant tirage.mp4",False,"quiz2026/QUIZ Masque.png", None, None,0],  # seq 2 - photo ou video de la question
@@ -109,7 +109,7 @@ actionQuiz2026=[[0,0,0,0,-1,"IntroQuizPhilippe.mp4",True,None, None, "Appuye sur
             [4,0,2,2,-1,None,False,"quiz2026/QUIZ de score.png",None,"Appuye sur un bouton",2],  # seq 6 - score
             [2,1,2,2,1,None,False,"quiz2026/masqueCamera.png", None, "A pour prendre la photo",3],  # seq 7
             [2,0,2,2,2,None,False,"impression_%a.png", None, "A pour reprendre la photo, B pour poursuivre",3],  # seq 8  TODO gestion du Retry
-            [0,0,0,0,-1,None,False,"vide.jpg","Back To The Future - Overture.mp3", "Fin du quiz",0]]  # seq 9 - fin
+            [0,0,0,0,-1,None,False,"fin.jpg","Back To The Future - Overture.mp3", "Fin du quiz",0]]  # seq 9 - fin
 
 equipes=["1998","1965","1976","2011","1981","2000","2026"]
 mode=const.MODEANNEE
@@ -175,7 +175,10 @@ class Sequence():
     def next(self):
         if self.no!= 8:  # pas de néttoyage pour le choix de l'année
             self.clear()
-        self.no = self.no + 1
+        if self.no >= len(self.actionTable)-1:
+            self.no=0
+        else:
+            self.no = self.no + 1
         self.action()
     def prev(self):
         self.clear()
@@ -207,7 +210,7 @@ class Sequence():
     def action(self):
         print("Go sequence",self.no)
         peripheriques.Neon(self.actionTable[self.no][0])
-        peripheriques.Ventillo(self.actionTable[self.no][1])
+        peripheriques.Ventilo(self.actionTable[self.no][1])
         peripheriques.Voltmetre(self.actionTable[self.no][2])
         peripheriques.Convecteur(self.actionTable[self.no][3])
         self.event=self.actionTable[self.no][4]
@@ -509,12 +512,14 @@ try:
                             if nbErreur > 2:
                                 boucleParadoxeTemporel()
                                 nbErreur=0  # réinitialise le compteur
+                                seq.go(5)
                             else:
+                                seq.go(5)
                                 pygame.mixer.music.load('./sons/Klaxon enrhumé.mp3')
                                 pygame.mixer.music.play()
                                 #pygame.mixer.music.set_volume(1)
                                 nbErreur=nbErreur+1
-                            seq.go(5)
+
                     elif mode==const.MODEANNEE and seq.no==7 and eventno==1:  # reprendre la photo
                         seq.prev()
                     elif mode==const.MODEQUIZ and seq.version==2 and seq.no==8 and eventno==1:  # reprendre la photo

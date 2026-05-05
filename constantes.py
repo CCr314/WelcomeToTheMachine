@@ -15,7 +15,7 @@ EVENT_TEXTE=pygame.USEREVENT + 6
 EVENT_VERSION=pygame.USEREVENT + 7
 EVENT_PHOTO=pygame.USEREVENT + 8
 
-TPSIMAGES=2   # TODO remettre à 10
+TPSIMAGES=10   # TODO remettre à 10
 
 posCadre=[(160,550),(990,550),(160,720),(990,720)]
 posQuestions=[(300,650),(1130,650),(300,830),(1130,830)]
