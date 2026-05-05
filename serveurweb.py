@@ -5,7 +5,6 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 import constantes as const
 import peripheriques as peri
 
-
 # serveur HTTP endPoint
 class Serv(BaseHTTPRequestHandler):
 
@@ -26,6 +25,15 @@ class Serv(BaseHTTPRequestHandler):
             except EOFError:
                 print("fichier de récupération incorrect")
 
+            # formate les scores
+            score='['
+            first=True
+            for n in scoreEquipe:
+                if not first:
+                    score=score+','
+                score=score+"'"+str(n)+"'"
+            score=score+']'
+
             self.send_response(200)
             self.send_header('Access-Control-Allow-Origin', '*')
             self.send_header('Access-Control-Allow-Methods', '*')
@@ -33,7 +41,7 @@ class Serv(BaseHTTPRequestHandler):
             self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate')
             self.send_header('Content-type','text/plain; charset=utf-8')
             self.end_headers()
-            reponse = "{'mode':'" + str(mode) + "', 'seq':'" + str(no) + "', 'equipe':'" + str(noEquipe) + "'}"
+            reponse = '{"mode": "' + str(mode) + '", "seq": "' + str(no) + '", "equipe": "' + str(noEquipe) + '", "score": ' + score + '}'
             print(reponse)
             self.wfile.write(reponse.encode())
         else:
@@ -83,25 +91,40 @@ class Serv(BaseHTTPRequestHandler):
                pygame.event.post(evt)
            elif self.path == '/raz':
                evt = pygame.event.Event(const.EVENT_RAZ)
-           elif self.path == '/ventillo/on':
-                retour=Ventillo(True)
-           elif self.path == '/ventillo/off':
-                retour=Ventillo(False)
+           elif self.path == '/ventilo/on':
+                retour=peri.Ventilo(True)
+           elif self.path == '/ventilo/off':
+                retour=peri.Ventilo(False)
            elif self.path == '/convecteur/on':
-                retour=Convecteur(True)
+                retour=peri.Convecteur(2)
            elif self.path == '/convecteur/off':
-                retour=Convecteur(False):
+                retour=peri.Convecteur(0)
+           elif self.path == '/voltmetre/on':
+                retour=peri.Voltmetre(2)
+           elif self.path == '/voltmetre/off':
+                retour=peri.Voltmetre(0)
            elif self.path == '/neon/1/on':
-                retour=Neon(1)
+                retour=peri.Neon(1)
            elif self.path == '/neon/2/on':
-                retour=Neon(2)
+                retour=peri.Neon(2)
            elif self.path == '/neon/3/on':
-                retour=Neon(3)
+                retour=peri.Neon(3)
            elif self.path == '/neon/4/on':
-                retour=Neon(4)
+                retour=peri.Neon(4)
+           elif self.path == '/neon/1/off':
+               retour=peri.NeonOff(1)
+           elif self.path == '/neon/2/off':
+               retour=peri.NeonOff(2)
+           elif self.path == '/neon/3/off':
+               retour=peri.NeonOff(3)
+           elif self.path == '/neon/4/off':
+               retour=peri.NeonOff(4)
+           elif self.path == '/neon/off':
+                retour=peri.Neon(0)
            elif self.path == '/photo':
                 evt = pygame.event.Event(const.EVENT_PHOTO)
                 pygame.event.post(evt)
+
            if retour:
                     self.send_response(200)
                     self.send_header('Access-Control-Allow-Origin', '*')
