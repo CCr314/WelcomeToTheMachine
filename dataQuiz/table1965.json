@@ -54,7 +54,7 @@
     "choix" : ["Felice Gimondi" , "Arie den Hartog" , "Jacques Anquetil", "Rik Van Looy"]
   },
   {
-    "question": "A quel age décéda Le Corbusier ?",
+    "question": "À quel âge décéda Le Corbusier ?",
     "image" : "reflexion.png",
     "reponse": 2,
     "choix" : ["67 ans" , "70 ans" , "77 ans", "79 ans"]
