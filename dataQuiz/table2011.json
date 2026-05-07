@@ -1,96 +1,96 @@
 [
   {
-    "question": "Quel événement a déclenché le début de la révolution du jasmin en Tunisie ?",
+    "question": "Quel evenement a declenche le debut de la revolution du jasmin en Tunisie ?",
     "image" : "reflexion.png",
     "reponse": 1,
-    "choix" : ["L'explosion d'une université à Tunis" , "L'immolation par le feu d'un jeune vendeur" , "Un pillage de magasins à Tunis par des bandes organisées", "Un procès truqué"]
+    "choix" : ["L'explosion d'une universite a Tunis" , "L'immolation par le feu d'un jeune vendeur" , "Un pillage de magasins a Tunis par des bandes organisees", "Un proces truque"]
   },
   {
-    "question": "Combien de chefs d'accusation sont requis contre DSK, suite à son incarcération pour viol ?",
+    "question": "Combien de chefs d'accusation sont requis contre DSK, suite a son incarceration pour viol ?",
     "image" : "peur.png",
     "reponse": 2,
     "choix" : ["5" , "7" , "9", "11"]
   },
   {
-    "question": "Quelle maison d'édition a fêté son centième anniversaire en 2011 ?",
+    "question": "Quelle maison d'edition a fete son centieme anniversaire en 2011 ?",
     "image" : "doute.png",
     "reponse": 2,
     "choix" : ["Plon" , "Flammarion" , "Gallimard", "Hachette"]
   },
   {
-    "question": "De quel pays Vaclav Havel, décédé en décembre 2011, avait-il été le président de 1993 à 2003 ?",
+    "question": "De quel pays Vaclav Havel, decede en decembre 2011, avait-il ete le president de 1993 a 2003 ?",
     "image" : "homme.png",
     "reponse": 1,
-    "choix" : ["Hongrie" , "Tchécoslovaquie" , "Pologne", "Roumanie"]
+    "choix" : ["Hongrie" , "Tchecoslovaquie" , "Pologne", "Roumanie"]
   },
   {
-    "question": "L'accélérateur de particules du CERN atteint un nouveau record en 2011 en produisant…",
+    "question": "L'accelerateur de particules du CERN atteint un nouveau record en 2011 en produisant…",
     "image" : "peur.png",
     "reponse": 2,
     "choix" : ["1 millions de collisions par seconde" , "10 millions de collisions par seconde" , "100 millions de collisions par seconde", "200 millions de collisions par seconde"]
   },
   {
-    "question": "Les All Blacks sont devenus champions du monde de rugby en Nouvelle-Zélande, contre qui ?",
+    "question": "Les All Blacks sont devenus champions du monde de rugby en Nouvelle-Zelande, contre qui ?",
     "image" : "sourire.png",
     "reponse": 0,
     "choix" : ["France" , "Afrique du Sud" , "Angleterre", "Australie"]
   },
   {
-    "question": "Oussama Ben Laden décède en mai 2011. Quel était sa nationalité ?",
+    "question": "Oussama Ben Laden decede en mai 2011. Quel etait sa nationalite ?",*
     "image" : "femme.png",
     "reponse": 1,
     "choix" : ["Pakistanais" , "Saoudien" , "Afghan", "Syrien"]
   },
   {
-    "question": "Quel est ce pays qui a été ravagé par un séisme et un tsunami le 11 mars ?",
+    "question": "Quel est ce pays qui a ete ravage par un seisme et un tsunami le 11 mars ?",
     "image" : "facile.png",
     "reponse": 2,
-    "choix" : ["Corée du Sud" , "Grèce" , "Japon", "Chine"]
+    "choix" : ["Coree du Sud" , "Grece" , "Japon", "Chine"]
   },
   {
-    "question": "2011 est une année record pour le cinéma français. Quel film fait près de 20 millions d'entrées ?",
+    "question": "2011 est une annee record pour le cinema français. Quel film fait pres de 20 millions d'entrees ?",
     "image" : "sourire.png",
     "reponse": 0,
-    "choix" : ["Intouchables" , "The Artist" , "Les Petits Mouchoirs", "Astérix et Obélix"]
+    "choix" : ["Intouchables" , "The Artist" , "Les Petits Mouchoirs", "Asterix et Obelix"]
   },
   {
     "question": "Dans quel lieu s'est tenu le mariage royal unissant Catherine Middleton au prince de Galles ?",
     "image" : "doute.png",
     "reponse": 0,
-    "choix" : ["L'abbaye de Westminste" , "La cathédrale Saint-Paul" , "Lambeth Palace", "Covent Garden"]
+    "choix" : ["L'abbaye de Westminste" , "La cathedrale Saint-Paul" , "Lambeth Palace", "Covent Garden"]
   },
   {
-    "question": "Comment se nomme la bactérie qui a intoxiqué plusieurs enfants dans le Nord-Pas-de-Calais en juin 2011 ?",
+    "question": "Comment se nomme la bacterie qui a intoxique plusieurs enfants dans le Nord-Pas-de-Calais en juin 2011 ?",
     "image" : "peur.png",
     "reponse": 2,
     "choix" : ["E. chrysanthemi" , "P. pestis" , "E. coli", "Pi Senli"]
   },
   {
-    "question": "À l'occasion de quel rassemblement le massacre sur l'île d'Utoya a-t-il eu lieu ?",
+    "question": "a l'occasion de quel rassemblement le massacre sur l'ile d'Utoya a-t-il eu lieu ?",
     "image" : "reflexion.png",
     "reponse": 0,
-    "choix" : ["Le camp d'été de la Ligue des jeunes travaillistes" , "Le meeting d'adhérents au Parti communiste norvégien" , "La commémoration d'un leader socialiste norvégien", "Un match de foot"]
+    "choix" : ["Le camp d'ete de la Ligue des jeunes travaillistes" , "Le meeting d'adherents au Parti communiste norvegien" , "La commemoration d'un leader socialiste norvegien", "Un match de foot"]
   },
   {
     "question": "Pour quelle affaire Jacques Servier est-il mis en examen en septembre 2011 ?",
     "image" : "homme.png",
     "reponse": 1,
-    "choix" : ["L'affaire des écoutes illégales à l'Élysée" , "L'affaire Mediator" , "L'affaire PIP", "L'affaire du sang contaminé"]
+    "choix" : ["L'affaire des ecoutes illegales a l'elysee" , "L'affaire Mediator" , "L'affaire PIP", "L'affaire du sang contamine"]
   },
   {
-    "question": "Quel tube a rendue célèbre Amya Winehouse décédée à l'âge de 27 ans ?",
+    "question": "Quel tube a rendue celebre Amya Winehouse decedee a l'age de 27 ans ?",
     "image" : "femme.png",
     "reponse": 1,
     "choix" : ["Respect" , "Rehab" , "Upside Down", "Rollin In The Deep"]
   },
   {
-    "question": "Quelle équipe les Français ont-ils battu en finale du championnat du monde en Suède ? ?",
+    "question": "Quelle equipe les Français ont-ils battu en finale du championnat du monde en Suede ? ?",
     "image" : "facile.png",
     "reponse": 2,
     "choix" : ["L'Espagne" , "La Roumanie" , "Le Danemark", "L'Islande"]
   },
   {
-    "question": "Elizabeth Taylor nous a quitté en 2011. Combien de fois a-t-elle été mariée ?",
+    "question": "Elizabeth Taylor nous a quitte en 2011. Combien de fois a-t-elle ete mariee ?",
     "image" : "femme.png",
     "reponse": 3,
     "choix" : ["5" , "6" , "7", "8"]
