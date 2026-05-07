@@ -204,7 +204,7 @@ class Sequence():
         # sauvegarde l'état du jeu
         print("sauvegarde point de reprise")
         f = open('./temp/store.pckl', 'wb')
-        pickle.dump([mode,scoreEquipe,seq.no,seq.noQuestion,seq.noEquipe],f)
+        pickle.dump([mode,scoreEquipe,self.no,self.noQuestion,self.noEquipe],f)
         f.close()
         #enregistre score equipes
         #enregistre no sequence
