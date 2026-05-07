@@ -8,6 +8,9 @@ class Serv(BaseHTTPRequestHandler):
         print(self.path)
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', '*')
+        self.send_header('Access-Control-Allow-Headers', '*')
+        self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate')
         self.send_header('Content-type','text/plain; charset=utf-8')
         self.end_headers()
         if self.path=="/info":
