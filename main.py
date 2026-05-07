@@ -6,6 +6,7 @@ from pygame.locals import *
 import serveurweb
 
 import constantes as const
+import impression as impr
 
 import peripheriques
 
@@ -101,9 +102,9 @@ actionQuiz=[[0,0,0,0,-1,"Teasing 60 v3.1.mp4",True,None, None, "Appuyez sur un b
 
 # neon, Ventilo, Voltmetre, Convecteur, noEvent, video,boucle,image, son, texte, timer
 actionQuiz2026=[[0,0,0,0,-1,"IntroQuizPhilippe.mp4",True,None, None, "Appuye sur un bouton",0],  # seq 0 -all bouton - boucle d'attente
-            [0,0,0,0,-1,None,False,"quiz2026/QUIZ de Garde 1.png", None, "Demarre",0],  # seq 1 - demarreur
-            [0,0,1,1,-1,"LA MACHINE FIXE 2026 avant tirage.mp4",False,"quiz2026/QUIZ Masque.png", None, None,0],  # seq 2 - photo ou video de la question
-            [1,0,2,2,5,None,False,"quiz2026/QUIZ Masque.png",None,None, 0],  # seq 3 - question
+            [0,0,0,0,5,None,False,"quiz2026/QUIZ de Garde 1.png", None, "Demarre",0],  # seq 1 - demarreur
+            [0,0,1,1,0,"LA MACHINE FIXE 2026 avant tirage.mp4",False,"quiz2026/QUIZ Masque.png", None, None,0],  # seq 2 - photo ou video de la question
+            [1,0,2,2,0,None,False,"quiz2026/QUIZ Masque.png",None,None, 0],  # seq 3 - question
             [2,0,2,2,8,None,False,"quiz2026/QUIZ Masque OK.png",None,"Va vers la droite", 3],  # seq 4 - reponse OK
             [3,1,2,2,8,None,False,"quiz2026/QUIZ Masque KO.png",None,"Va vers la droite", 3],  # seq 5 - reponse KO
             [4,0,2,2,-1,None,False,"quiz2026/QUIZ de score.png",None,"Appuye sur un bouton",2],  # seq 6 - score
@@ -342,14 +343,8 @@ seq=Sequence()
 
 
 def impression(annee):
-    pdf = FPDF(orientation="P", unit="mm", format=(150,100))
-    pdf.add_page()
+    impr.impression("images/impression_" + annee + ".png")
 
-    pdf.image("images/impression_" + annee + ".png", x=0, y=0, w=150, h=100)
-
-    pdf.output("./temp/impression" + annee + ".pdf")
-    if isImprimante:
-        print("lancement de l'impression")
 
 print("Préparation WebServer")
 loop_thread = threading.Thread(target=serveurweb.lanceHttpServ)
@@ -472,6 +467,7 @@ try:
                 print("affecte equipe " + str(event.no))
                 seq.noEquipe=event.no
                 nbErreur=0
+                seq.go(0)
             elif event.type==const.EVENT_TEXTE:
                 seq.texte = seq.actionTable[seq.no][9]
             elif event.type == QUIT:

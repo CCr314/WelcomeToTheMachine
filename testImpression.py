@@ -2,18 +2,19 @@
 # FPDF
 from fpdf import FPDF
 
+import cups
+conn = cups.Connection ()
+printers = conn.getPrinters ()
+for printer in printers:
+    print( printers[printer].keys())
 
-pdf = FPDF(orientation="P", unit="mm", format=(150,100))
-pdf.add_page()
-##pdf.add_font("BTTF","","./font/BTTF.ttf")
-pdf.add_font("ARIAL_TTF","","./font/arial.ttf")
-pdf.set_font('ARIAL_TTF',"",14)
+printer_name = list(printers.keys())[0]
+# 4. Lancer l'impression
+# Arguments : Nom de l'imprimante, Chemin du fichier, Titre du job, Options
+file_path = "/home/claude/dev/pipo/WelcomeToTheMachine/images/impression_2026.png"
+title = "Impression via Python"
+options = {"media": "jpn_hagaki_100x148mm", "sides": "one-sided"}
 
-pdf.image("images/photo1.png", x=30, y=35, w=111, h=56)
+job_id = conn.printFile("Canon_SELPHY_CP1300_USB", file_path, title, options)
 
-pdf.image("images/masquePhoto.png", x=0, y=0, w=150, h=100)
-with pdf.rotation(angle=-11, x=0, y=0):
-    pdf.text(80,0.4,"1965")
-
-pdf.output("./temp/test.pdf")
-print("lancement de l'impression")
+print(f"Impression lancée avec succès. ID du job : {job_id}")
