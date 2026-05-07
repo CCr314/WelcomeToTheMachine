@@ -1,6 +1,7 @@
 import pygame
 import requests
 import pickle
+import json
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import constantes as const
 import peripheriques as peri
@@ -26,13 +27,11 @@ class Serv(BaseHTTPRequestHandler):
                 print("fichier de récupération incorrect")
 
             # formate les scores
-            score='['
-            first=True
+            json_score = []
+
             for n in scoreEquipe:
-                if not first:
-                    score=score+','
-                score=score+"'"+str(n)+"'"
-            score=score+']'
+                json_score.append(n)
+
 
             self.send_response(200)
             self.send_header('Access-Control-Allow-Origin', '*')
@@ -41,9 +40,13 @@ class Serv(BaseHTTPRequestHandler):
             self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate')
             self.send_header('Content-type','text/plain; charset=utf-8')
             self.end_headers()
-            reponse = '{"mode": "' + str(mode) + '", "seq": "' + str(no) + '", "equipe": "' + str(noEquipe) + '", "score": ' + score + '}'
-            print(reponse)
-            self.wfile.write(reponse.encode())
+
+            json_data = {'mode': str(mode),'seq' : str(no), 'equipe' :   str(noEquipe), 'score' :json_score }
+            json_to_pass = json.dumps(json_data)
+
+            #reponse = '{"mode": "' + str(mode) + '", "seq": "' + str(no) + '", "equipe': "' + str(noEquipe) + '", "sco str(noEquipe), re": ' + score + '}'
+            print(json_to_pass)
+            self.wfile.write(json_to_pass.encode('utf-8'))
         else:
 
            if self.path =='/modeAnnee':
@@ -91,9 +94,9 @@ class Serv(BaseHTTPRequestHandler):
                pygame.event.post(evt)
            elif self.path == '/raz':
                evt = pygame.event.Event(const.EVENT_RAZ)
-           elif self.path == '/ventilo/on':
+           elif self.path == '/ventilo/1/on':
                 retour=peri.Ventilo(True)
-           elif self.path == '/ventilo/off':
+           elif self.path == '/ventilo/1/off':
                 retour=peri.Ventilo(False)
            elif self.path == '/convecteur/on':
                 retour=peri.Convecteur(2)
@@ -126,26 +129,29 @@ class Serv(BaseHTTPRequestHandler):
                 pygame.event.post(evt)
 
            if retour:
-                    self.send_response(200)
-                    self.send_header('Access-Control-Allow-Origin', '*')
-                    self.send_header('Access-Control-Allow-Methods', '*')
-                    self.send_header('Access-Control-Allow-Headers', '*')
-                    self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate')
-                    self.send_header('Content-type','text/plain; charset=utf-8')
-                    self.end_headers()
-                    self.wfile.write(b"OK")
+                self.send_response(200)
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.send_header('Access-Control-Allow-Methods', '*')
+                self.send_header('Access-Control-Allow-Headers', '*')
+                self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate')
+                self.send_header('Content-type','text/plain; charset=utf-8')
+                self.end_headers()
+
+                self.wfile.write(b"OK")
            else:
-                    self.send_response(400)
-                    self.send_header('Access-Control-Allow-Origin', '*')
-                    self.send_header('Access-Control-Allow-Methods', '*')
-                    self.send_header('Access-Control-Allow-Headers', '*')
-                    self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate')
-                    self.send_header('Content-type','text/plain; charset=utf-8')
-                    self.end_headers()
-                    self.wfile.write(b"KO")
+                self.send_response(400)
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.send_header('Access-Control-Allow-Methods', '*')
+                self.send_header('Access-Control-Allow-Headers', '*')
+                self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate')
+                self.send_header('Content-type','text/plain; charset=utf-8')
+                self.end_headers()
+
+                self.wfile.write(b"KO")
 
 
 def lanceHttpServ():
     print("lancement serveur HTTP port 8081")
-    httpd = HTTPServer(('localhost',8081),Serv)
+
+    httpd = HTTPServer(('',8081),Serv)
     httpd.serve_forever()
