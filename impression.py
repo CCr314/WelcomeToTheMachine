@@ -2,8 +2,8 @@ import cups
 conn = cups.Connection ()
 
 def impression(file_path):
-    printer_name = list(printers.keys())[0]
-    file_path = "/home/claude/dev/pipo/WelcomeToTheMachine/images/impression_2026.png"
+    #printer_name = list(printers.keys())[0]
+    #file_path = "./images/impression_2026.png"
     title = "Welcome to the machine"
     options = {"media": "jpn_hagaki_100x148mm", "sides": "one-sided"}
 
