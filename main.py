@@ -102,8 +102,8 @@ actionQuiz=[[0,0,0,0,-1,"Teasing 60 v3.1.mp4",True,None, None, "Appuyez sur un b
 
 # neon, Ventilo, Voltmetre, Convecteur, noEvent, video,boucle,image, son, texte, timer
 actionQuiz2026=[[0,0,0,0,-1,"IntroQuizPhilippe.mp4",True,None, None, "Appuye sur un bouton",0],  # seq 0 -all bouton - boucle d'attente
-            [0,0,0,0,5,None,False,"quiz2026/QUIZ de Garde 1.png", None, "Demarre",0],  # seq 1 - demarreur
-            [0,0,1,1,0,"LA MACHINE FIXE 2026 avant tirage.mp4",False,"quiz2026/QUIZ Masque.png", None, None,0],  # seq 2 - photo ou video de la question
+            [0,0,1,0,5,None,False,"quiz2026/QUIZ de Garde 1.png", None, "Demarre",0],  # seq 1 - demarreur
+            [0,0,2,1,0,"LA MACHINE FIXE 2026 avant tirage.mp4",False,"quiz2026/QUIZ Masque.png", None, None,0],  # seq 2 - photo ou video de la question
             [1,0,2,2,0,None,False,"quiz2026/QUIZ Masque.png",None,None, 0],  # seq 3 - question
             [2,0,2,2,8,None,False,"quiz2026/QUIZ Masque OK.png",None,"Va vers la droite", 3],  # seq 4 - reponse OK
             [3,1,2,2,8,None,False,"quiz2026/QUIZ Masque KO.png",None,"Va vers la droite", 3],  # seq 5 - reponse KO
@@ -281,7 +281,6 @@ class Sequence():
                 # todo gerer la fin pour les différents mode
                 if self.noEquipe >=6:
                     print("fin du jeu")
-                    #todo gérer la fin du game
                 else:
                     print("on passe à l'équipe suivante")
                     self.noEquipe = self.noEquipe + 1
@@ -291,6 +290,7 @@ class Sequence():
             elif self.no==9 and self.version==2:   # Fin
 
                 #todo : imprime la photo
+                impression("2026")
                 print("fin du jeu")
 
             # video
@@ -343,7 +343,7 @@ seq=Sequence()
 
 
 def impression(annee):
-    impr.impression("images/impression_" + annee + ".png")
+    impr.impression("./images/impression_" + annee + "_annee.png")
 
 
 print("Préparation WebServer")
