@@ -36,7 +36,7 @@
     "choix" : ["France" , "Afrique du Sud" , "Angleterre", "Australie"]
   },
   {
-    "question": "Oussama Ben Laden decede en mai 2011. Quel etait sa nationalite ?",*
+    "question": "Oussama Ben Laden decede en mai 2011. Quel etait sa nationalite ?",
     "image" : "femme.png",
     "reponse": 1,
     "choix" : ["Pakistanais" , "Saoudien" , "Afghan", "Syrien"]
@@ -57,7 +57,7 @@
     "question": "Dans quel lieu s'est tenu le mariage royal unissant Catherine Middleton au prince de Galles ?",
     "image" : "doute.png",
     "reponse": 0,
-    "choix" : ["L'abbaye de Westminste" , "La cathedrale Saint-Paul" , "Lambeth Palace", "Covent Garden"]
+    "choix" : ["L'abbaye de Westminster" , "La cathedrale Saint-Paul" , "Lambeth Palace", "Covent Garden"]
   },
   {
     "question": "Comment se nomme la bacterie qui a intoxique plusieurs enfants dans le Nord-Pas-de-Calais en juin 2011 ?",
