@@ -15,7 +15,7 @@
     "question": "En janvier 2000, pourquoi de nombreuses familles françaises vivaient-elles dans le noir ?",
     "image" : "peur.png",
     "reponse": 1,
-    "choix" : ["Une chute de grelons a coupe beaucoup de cables electriques" , "Les tempetes de l'an passe ont laisse beaucoup de degats" , "es greves a repetitions", "Un attentat breton"]
+    "choix" : ["Une chute de grelons a coupe beaucoup de cables electriques" , "Les tempetes de l'an passe ont laisse beaucoup de degats" , "Les greves a repetitions", "Un attentat breton"]
   },
   {
     "question": "De quelle nationalite est Herminator, surnom du meilleur skieur du monde Hermann Maier ?",

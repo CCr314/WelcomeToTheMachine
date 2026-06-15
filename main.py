@@ -88,7 +88,7 @@ actionSequence=[[0,0,0,0,-1,"Teasing 60 v3.1.mp4",True,None, None, "Appuyez sur 
                 [3,0,2,2,3,"LA MACHINE FIXE 2026 avant tirage.mp4",True,None, None, "Appuyez sur le bouton C",2],  # seq 8 - intro choix annéee
                 [3,0,2,2,4,"tirage1976.mp4",False,None, None, "Appuyez sur le bouton D",8],  # seq 9 - choix année
                 [4,0,2,2,-1,None,False,"impression_%a_annee.png", "Back To The Future - Overture.mp3", "Prendre la carte et la fiche mission",2],  # seq 10 - impression de la mission
-                [0,0,0,0,-1,None,False,None, None, "Fin de la mission",0]]  # seq 11 - fin est retour au debut
+                [0,0,0,0,-1,None,False,"fin.jpg", None, "Fin de la mission",0]]  # seq 11 - fin est retour au debut
 
 
 actionQuiz=[[0,0,0,0,-1,"Teasing 60 v3.1.mp4",True,None, None, "Appuyez sur un bouton",0],  # seq 0 -all bouton - boucle d'attente
@@ -98,7 +98,7 @@ actionQuiz=[[0,0,0,0,-1,"Teasing 60 v3.1.mp4",True,None, None, "Appuyez sur un b
             [2,0,2,2,8,None,False,"quiz/QUIZ Masque OK.png",None,"Allez vers la droite", 3],  # seq 4 - reponse OK
             [3,1,2,2,8,None,False,"quiz/QUIZ Masque KO.png",None,"Allez vers la droite", 3],  # seq 5 - reponse KO
             [4,0,2,2,-1,None,False,"quiz/QUIZ de score.png",None,"Appuyez sur un bouton",10],  # seq 6 - score
-            [0,0,0,0,-1,None,False,"vide.jpg",None, "Fin du quiz",0]]  # seq 7 - fin
+            [0,0,0,0,-1,None,False,"fin.jpg",None, "Fin du quiz",0]]  # seq 7 - fin
 
 # neon, Ventilo, Voltmetre, Convecteur, noEvent, video,boucle,image, son, texte, timer
 actionQuiz2026=[[0,0,0,0,-1,"IntroQuizPhilippe.mp4",True,None, None, "Appuye sur un bouton",0],  # seq 0 -all bouton - boucle d'attente
