@@ -18,4 +18,4 @@ EVENT_PHOTO=pygame.USEREVENT + 8
 TPSIMAGES=10   # TODO remettre à 10
 
 posCadre=[(160,550),(990,550),(160,720),(990,720)]
-posQuestions=[(300,650),(1130,650),(300,830),(1130,830)]
+posQuestions=[(100,450),(1000,450),(100,750),(1000,750)]

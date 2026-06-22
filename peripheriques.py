@@ -11,59 +11,75 @@ URI_Convecteur= os.getenv("URI_Convecteur")
 URI_Pupitre=os.getenv("URI_Pupitre")
 
 def Neon(no):
-    if no==0:
-        print("eteint Néon")
-        contents = urllib.request.urlopen(URI_Convecteur + "/neon/off").read()
-        print(contents)
-    else:
-        print("allume neon",no)
-        contents = urllib.request.urlopen(URI_Convecteur + "/neon/" + str(no) + "/on").read()
-        print(contents)
+    try:
+        if no==0:
+            print("eteint Néon")
+            urllib.request.urlopen(URI_Convecteur + "/neon/off")
+
+        else:
+            print("allume neon",no)
+            urllib.request.urlopen(URI_Convecteur + "/neon/" + str(no) + "/on")
+
+    except Exception:
+        print("erreur appel http")
+
     return True
 def NeonOff(no):
-    print("etient neon",no)
-    contents = urllib.request.urlopen(URI_Convecteur + "/neon/" + str(no) + "/off").read()
-    print(contents)
+    try:
+        print("etient neon",no)
+        urllib.request.urlopen(URI_Convecteur + "/neon/" + str(no) + "/off")
+
+    except Exception:
+        print("erreur appel http")
     return True
 
 def Ventilo(on):
-    if on:
-        print("ventilo on")
-        contents = urllib.request.urlopen(URI_Convecteur + "/ventilo/av/on").read()
-        print(contents)
-    else:
-        print("ventilo off")
-        contents = urllib.request.urlopen(URI_Convecteur + "/ventilo/av/off").read()
-        print(contents)
+    try:
+        if on:
+            print("ventilo on")
+            urllib.request.urlopen(URI_Convecteur + "/ventilo/av/on")
+
+        else:
+            print("ventilo off")
+            urllib.request.urlopen(URI_Convecteur + "/ventilo/av/off")
+
+    except Exception:
+        print("erreur appel http")
     return True
 
 def Voltmetre(action):
-    if action==0:
-        print("arret voltmetre")
-        print(URI_Pupitre + "/stop")
-        contents = urllib.request.urlopen(URI_Pupitre + "/stop").read()
-        print(contents)
-    elif action==1:
-        print("demarrage voltmetre")
-        contents = urllib.request.urlopen(URI_Pupitre + "/start").read()
-        print(contents)
-    elif action==2:
-        print("voltmetre on")
-        contents = urllib.request.urlopen(URI_Pupitre + "/run").read()
-        print(contents)
+    try:
+        if action==0:
+            print("arret voltmetre")
+            print(URI_Pupitre + "/stop")
+            urllib.request.urlopen(URI_Pupitre + "/stop")
+
+        elif action==1:
+            print("demarrage voltmetre")
+            urllib.request.urlopen(URI_Pupitre + "/start")
+
+        elif action==2:
+            print("voltmetre on")
+            urllib.request.urlopen(URI_Pupitre + "/run")
+
+    except Exception:
+        print("erreur appel http")
     return True
 
 def Convecteur(action):
-    if action==0:
-        print("arret Convecteur")
-        contents = urllib.request.urlopen(URI_Convecteur + "/stop").read()
-        print(contents)
-    elif action==1:
-        print("demarrage Convecteur")
-        contents = urllib.request.urlopen(URI_Convecteur + "/start").read()
-        print(contents)
-    elif action==2:
-        print("Convecteur on")
-        contents = urllib.request.urlopen(URI_Convecteur + "/run").read()
-        print(contents)
+    try:
+        if action==0:
+            print("arret Convecteur")
+            urllib.request.urlopen(URI_Convecteur + "/stop")
+
+        elif action==1:
+            print("demarrage Convecteur")
+            urllib.request.urlopen(URI_Convecteur + "/start")
+
+        elif action==2:
+            print("Convecteur on")
+            urllib.request.urlopen(URI_Convecteur + "/run")
+
+    except Exception:
+        print("erreur appel http")
     return True

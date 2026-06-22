@@ -1,0 +1,12 @@
+Police pour les questions   OK
+
+ABCD sur le Quizz Masque (au format PNG)  OK
+
+Image pour les équipes   OK
+Images réponses
+
+format images réponses en 1920x1080 (exemple Punishment_sisyph)
+
+
+votre score en rouge  OK
+Taille texte suggestin réponse (multiligne)

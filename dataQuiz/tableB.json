@@ -1,0 +1,72 @@
+[
+{
+"question": "Quelle était la fonction d’Apollon ?",
+"video" : null,
+"image" : "apollon.jpg",
+"reponse": 3,
+"choix" : ["Dieu de la puissance, la royauté et la justice", "Dieu de la guerre et le combat", "Dieu de la musique, la beauté et le soleil", "Dieu du stade pour faire de jolis calendriers"]
+},
+{
+"question": "Quelle est la plus belle surprise que Salomé ait eu ?",
+"video" : "surprise.mp4",
+"image" : null,
+"reponse": 3,
+"choix" : ["Un iPhone dernier cri", "Une orange à Noel", "Un p'tit chat", "Un Pallier n'est jamais surpris"]
+},
+{
+"question": "De quelle tribu amérindienne était Pocahontas ?",
+"video" : null,
+"image" : "pocahontas.JPG",
+"reponse": 1,
+"choix" : ["Des Powhatans", "Des Cherokees", "Des Omahas", "Des Disneyland Paris"]
+},
+{
+"question": "Quel cheval célèbre Salomé a eu l'occasion de monter ?",
+"video" : null,
+"image" : "jolly_jumper.JPG",
+"reponse": 3,
+"choix" : ["Jappeloup", "Petit Tonnerre", "Jolly Jumper","Maximus"]
+},
+{
+"question": "Pourquoi Salomé a été triste le 04 Juin 2026 ?",
+"video" : "persepolis.mp4",
+"image" : null,
+"reponse": 3,
+"choix" : ["Elle était 79ème dans la liste d'attente de Parcousup", "Le décès de Bernadette Chirac un peu en avance", "La décès de Marjane Satrapi", "Plus de dessert à la cantine"]
+},
+{
+"question": "Dans sa chanson Billie Eilish souhaite elle ?",
+"video" : null,
+"image" : "Billie.png",
+"reponse": 1,
+"choix" : ["Manger une fille au déjeuner", "Inviter un garçon à déjeuner", "Préparer un déjeuner", "Déjeuner en Paix"]
+},
+{
+"question": "Quel auteur de BD réuni Salomé et son père ?",
+"video" : null,
+"image" : "Riad.png",
+"reponse": 4,
+"choix" : ["L'auteur dont le héros se prénomme Pascal", "L'auteur dont le héros se prénomme Ester", "L'auteur dont le héros se prénomme Vincent", "Réponse 1,2 et 3"]
+},
+{
+"question": "Salomé a t'elle lu ?",
+"video" : null,
+"image" : "toilet.png",
+"reponse": 2,
+"choix" : ["Un manga avec un chat geek", "Un manga avec un fantome qui sort des toilettes du lycée", "Un manga sur Nietzsche", "Réponse 1,2 et 3"]
+},
+{
+"question": "Avec quel artiste Salomé à t'elle participé à une masterclass ?",
+"video" : null,
+"image" : "corbel.jpeg",
+"reponse": 3,
+"choix" : ["Alice Soria-Cadoret", "Gwenael Kerleo", "Cécile Corbel", "Assurancetourix"]
+},
+{
+"question": "Quelle figure Salomé a t'elle apprise avec Elise ?",
+"video" : "roller.mp4",
+"image" : null,
+"reponse": 1,
+"choix" : ["Le wheeling", "Le fishleg avant", "La kasakchoc arrière", "Le piercing"]
+}
+]

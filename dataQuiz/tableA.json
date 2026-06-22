@@ -1,0 +1,72 @@
+[
+{
+"question": "Quel sport Salomé a déjà pratiqué ?",
+"video" : null,
+"image" : "Aqua_Poney.jpg",
+"reponse": 4,
+"choix": ["Lama-Yoga", "Pinguin-Curling", "Taupe-Golf ", "Aqua-Poney"]
+},
+{
+"question": "Quelle infraction à la loi Salomé a commis lors de ces 18 denières années ?",
+"video" : null,
+"image" : "Flash.jpg",
+"reponse": 2,
+"choix" : ["Port illégal de claquettes / chaussettes", "Flagrant délit d'excès de vitesse", "Consommation illégale de choux de bruxelle", "Utilisation frauduleuse du 'Oui j'arrive, pfff'"]
+},
+{
+"question": "Quelle était la punition de Sisyphe dans les Enfers ?",
+"video" : null,
+"image" : "Punishment_sisyph.jpg",
+"reponse": 2,
+"choix" : ["Être dévoré chaque jour par un aigle", "Rouler éternellement un rocher en haut d'une colline", "Rester debout dans l'eau sans pouvoir boire", "Porter le ciel sur ses épaules pour l'éternité"]
+},
+{
+"question": "Quel animal sauvage as t'elle déjà réussi à domestiquer",
+"video" : null,
+"image" : "Flamand_Rose.jpg",
+"reponse": 3,
+"choix" : ["Une mouette rieuse grâce à la méthode Gaston", "Une limace, mais elle en a bavé", "Un flamant rose et c'était un jeu", "Un grizzly grace à sa force herculéenne"]
+},
+{
+"question": "Son comportement sur la route est il :",
+"video" : null,
+"image" : "Tire_langue.JPG",
+"reponse": 3,
+"choix" : ["Exemplaire, la courtoisie c'est son état d'esprit", "Sympa, comme les routiers (blague de booomer)", "Exécrable, il ne faut pas la chauffer", "Inconscient, la vitesse c'est sa passion"]
+},
+{
+"question": "Son plat préféré a été :",
+"video" : null,
+"image" : "Frites.JPG",
+"reponse": 4,
+"choix" : ["La pasta de la mamma !", "La pizza de la mamma (décidemment)", "Le riz poulet comme son père", "Des frites, des frites, des frites !"]
+},
+{
+"question": "Dans la famille Pallier le roi de la glisse c'est :",
+"video" : null,
+"image" : "chute.jpg",
+"reponse": 3,
+"choix" : ["La mère", "La fille", "Le père (évidemment)", "Les trois comme toutes les familles parfaites"]
+},
+{
+"question": "La plus grosse vague jamais surfée a été enregistrée à Nazaré, au Portugal, avec une hauteur de :",
+"video" : "Body Board.mp4",
+"image" : null,
+"reponse": 2,
+"choix" : ["10 Mètres", "26 Mètres", "50 Mètres", "350 Mètres par Brice de Nice évidemment"]
+},
+{
+"question": "Quelle année le service militaire obligatoire a t'il officiellement pris fin en France :",
+"video" : "service_militaire.mp4",
+"image" : null,
+"reponse": 3,
+"choix" : ["1995", "1996", "1997", "1998"]
+},
+{
+"question": "Quelle est l'altitude du sommet du Mont Blanc ?",
+"video" : null,
+"image" : "Mont_blanc.jpg",
+"reponse": 1,
+"choix" : ["4806 Mètres", "4807 Mètres", "4808 Mètres", "Vachement haut"]
+}
+]

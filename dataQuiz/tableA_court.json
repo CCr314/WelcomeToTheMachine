@@ -1,0 +1,16 @@
+[
+{
+"question": "Quel sport Salomé a déjà pratiqué ?",
+"video" : null,
+"image" : "Aqua_Poney.jpg",
+"reponse": 4,
+"choix": ["Lama-Yoga", "Pinguin-Curling", "Taupe-Golf ", "Aqua-Poney"]
+},
+{
+"question": "Quelle infraction à la loi Salomé a commis lors de ces 18 denières années ?",
+"video" : null,
+"image" : "Flash.jpg",
+"reponse": 2,
+"choix" : ["Port illégal de claquettes / chaussettes", "Flagrant délit d'excès de vitesse", "Consommation illégale de choux de bruxelle", "Utilisation frauduleuse du 'Oui j'arrive, pfff'"]
+}
+]
