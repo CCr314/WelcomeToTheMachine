@@ -6,7 +6,6 @@ from pygame.locals import *
 import serveurweb
 
 import constantes as const
-import impression as impr
 
 import peripheriques
 
