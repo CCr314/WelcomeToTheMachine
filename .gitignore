@@ -1,7 +1,7 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
-*$py.class
+-*$py.class
 
 # C extensions
 *.so
@@ -223,3 +223,6 @@ __marimo__/
 *.mp4
 *.avi
 *.zip
+*.MOV
+videos/
+*.mp3
