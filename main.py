@@ -361,10 +361,8 @@ try:
                             seq.go(4)
                         else:
                             print("question suivante")
-                            if seq.version==1:
-                                seq.go(1)
-                            else:
-                                seq.go(1)
+                            seq.go(1)
+
 
                     elif seq.event==eventno:
                         seq.next()
@@ -426,8 +424,13 @@ try:
                         seq.vid.restart()
                     else:
                         seq.vid.close()
-                        seq.go(1)
-
+                        if seq.noQuestion >= len(seq.questions)-1:
+                            print("fin du Quizz")
+                            seq.go(4)
+                        else:
+                            print("question suivante")
+                            seq.go(1)
+                            
             if seq.img != None:  # affiche l'image de fond
                 fenetre.blit(seq.img, (0,0))
 
