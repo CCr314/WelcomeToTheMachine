@@ -32,6 +32,13 @@ def NeonOff(no):
     except Exception:
         print("erreur appel http")
     return True
+def Color(couleur):
+    try:
+        print("color")
+        urllib.request.urlopen(URI_Convecteur + "/color/" + couleur)
+    except Exception:
+        print("erreur appel http")
+    return True
 
 def Ventilo(on):
     try:

@@ -127,6 +127,7 @@ class Sequence():
 
     def action(self):
         print("Go sequence",self.no)
+        peripheriques.Color("blanc")
         peripheriques.Neon(self.actionTable[self.no][0])
         peripheriques.Ventilo(self.actionTable[self.no][1])
         peripheriques.Voltmetre(self.actionTable[self.no][2])
@@ -246,6 +247,7 @@ loop_thread.start()
 
 def boucleParadoxeTemporel():
     loop=True
+    peripheriques.Color("rouge")
     vid=Video("./videos/ParadoxeTemporel.mp4")
     #vid.set_volume(1)
     if seq.vid != None:
@@ -262,7 +264,7 @@ def boucleParadoxeTemporel():
 
     if seq.vid != None:
         seq.vid.resume()
-
+    peripheriques.Color("blanc")
 
 def checkEvent(event):
     value = 0
@@ -375,15 +377,16 @@ try:
                             pygame.mixer.music.play()
                             scoreEquipe[seq.noEquipe]=scoreEquipe[seq.noEquipe]+1
                             seq.next()
+                            peripheriques.Color("vert")
                         else:
                             print("play KO")
                             pygame.mixer.music.load('./sons/Mauvaise_reponse.mp3')
                             pygame.mixer.music.play()
-                            #pygame.mixer.music.set_volume(1)
+                                                        #pygame.mixer.music.set_volume(1)
                             nbErreur=nbErreur+1
                             #seq.go(3)
                             seq.next()
-
+                            peripheriques.Color("rouge")
                     elif eventno != 6:   # pas d'erreur au relachement du démarreur
                         # erreur de bouton
                         if nbErreur > 2:
@@ -430,7 +433,7 @@ try:
                         else:
                             print("question suivante")
                             seq.go(1)
-                            
+
             if seq.img != None:  # affiche l'image de fond
                 fenetre.blit(seq.img, (0,0))
 
