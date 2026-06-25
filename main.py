@@ -163,7 +163,7 @@ class Sequence():
                 self.vidBoucle=self.actionTable[self.no][6]
 
         elif mode==const.MODEQUIZ:
-            if self.no==1:
+            if self.no==0:
                 # charge les données
                 print("charge les données de " +equipes[self.noEquipe])
                 with open("dataQuiz/table"+equipes[self.noEquipe]+".json") as f:
