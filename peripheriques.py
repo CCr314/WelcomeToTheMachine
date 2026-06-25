@@ -13,12 +13,14 @@ URI_Pupitre=os.getenv("URI_Pupitre")
 def Neon(no):
     try:
         if no==0:
-            print("eteint Néon")
-            urllib.request.urlopen(URI_Convecteur + "/neon/off")
+            url=URI_Convecteur + "/neon/off"
+            print(url)
+            urllib.request.urlopen(url)
 
         else:
-            print("allume neon",no)
-            urllib.request.urlopen(URI_Convecteur + "/neon/" + str(no) + "/on")
+            url=URI_Convecteur + "/neon/" + str(no) + "/on"
+            print(url)
+            urllib.request.urlopen(url)
 
     except Exception:
         print("erreur appel http")
@@ -26,16 +28,18 @@ def Neon(no):
     return True
 def NeonOff(no):
     try:
-        print("etient neon",no)
-        urllib.request.urlopen(URI_Convecteur + "/neon/" + str(no) + "/off")
+        url=URI_Convecteur + "/neon/" + str(no) + "/off"
+        print(url)
+        urllib.request.urlopen(url)
 
     except Exception:
         print("erreur appel http")
     return True
 def Color(couleur):
     try:
-        print("color")
-        urllib.request.urlopen(URI_Convecteur + "/color/" + couleur)
+        url=URI_Convecteur + "/color/" + couleur
+        print(url)
+        urllib.request.urlopen(url)
     except Exception:
         print("erreur appel http")
     return True
